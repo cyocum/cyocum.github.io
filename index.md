@@ -5,7 +5,7 @@
 layout: home
 ---
 
-A place to communicate occational topics concerning the [IrishGen
+A place to communicate occasional topics concerning the [IrishGen
 database](https://github.com/cyocum/irish-gen). The focus will be on
 difficulties and solutions to translating medieval Irish genealogical
 information from manuscript sources to Linked Data and other
@@ -16,3 +16,6 @@ paper on your experience or on an aspect of the intersection between
 early Medieval Ireland and information storage and retrieval
 techniques, please contact the email address at the bottom of this
 page.
+
+# Posts
+

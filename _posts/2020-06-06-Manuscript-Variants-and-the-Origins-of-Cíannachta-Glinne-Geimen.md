@@ -1,5 +1,6 @@
 ---
 layout: post
+date: 2020-06-06 14:34:52 +0100
 title: Manuscript Variants and The Origins of Cíannachta Glinne Geimen
 author: et
 ---
