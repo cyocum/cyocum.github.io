@@ -5,10 +5,8 @@ title: Manuscript Variants and The Origins of Cíannachta Glinne Geimen
 author: et
 ---
 
-# Manuscript Variants and The Origins of Cíannachta Glinne Geimen
-
 {% assign author = site.data.authors[page.author]%}
-{{author.name}} 
+{{author.name}}
 
 ORCID: <a href="https://orcid.org/{{ author.orcid }}" title="{{author.name}}">{{author.orcid}}</a>
 
@@ -16,12 +14,12 @@ ORCID: <a href="https://orcid.org/{{ author.orcid }}" title="{{author.name}}">{{
 This is the first of a series of blogposts that are intended to illustrate the kind of decisions we have to take when encoding medieval Irish genealogies as RDF, as well as what can be done with the results. This can get complicated and require editorial judgement. We are working, after all, with pre-modern manuscript sources. Their compilers are influenced by the political implications of the past, imagined or otherwise, in their own society and struggling to understand the textual tradition in which they worked.  
 
 ## The Genealogies and IrishGen
-For introductory reading on the genealogies, we recommend Nollaig Ó Muraíle’s published lecture _[The Irish Genealogies: Irish History’s Poor Relation?](https://www.ria.ie/its-occasional-lecture-vol-3-irish-genealogies-irish-historys-poor-relation)_ and Matthew Holmberg’s PhD thesis, ‘[Towards a Relative Chronology of the Milesian Genealogical Scheme](https://dash.harvard.edu/handle/1/37945002)’ (pp. 3–54). For an overview of IrishGen and our use of RDF, see the project [README](https://github.com/cyocum/irish-gen). All our data is available in our [GitHub repository](https://github.com/cyocum/irish-gen).
+For introductory reading on the genealogies, we recommend Nollaig Ó Muraíle’s published lecture, _[The Irish Genealogies: Irish History’s Poor Relation?](https://www.ria.ie/its-occasional-lecture-vol-3-irish-genealogies-irish-historys-poor-relation)_, and Matthew Holmberg’s PhD thesis, ‘[Towards a Relative Chronology of the Milesian Genealogical Scheme](https://dash.harvard.edu/handle/1/37945002)’ (pp. 3–54). For an overview of IrishGen and our use of RDF, see the project [README](https://github.com/cyocum/irish-gen). All our data is available in our [GitHub repository](https://github.com/cyocum/irish-gen).
 
 ## Cíannachta Glinne Geimen
-Today, we are going to be looking at material on the origins of the kingdom of the Cíannachta Glinne Geimen, that is, the Cíannachta (a population group) of Glengiven in modern Co. Derry. The town of [Dungiven](https://www.logainm.ie/1411615.aspx), south of Limavady, and the barony of [Keenaght](https://www.logainm.ie/298.aspx) preserve elements of the kingdom’s name and its approximate territory. Kings of the Cíannachta Glinne Geimen are attested in the Irish annals from the sixth through to the twelfth century, although it is likely that many if not all would have been sub-kings to the king of Ailech.
+Today, we are going to be looking at material on the origins of the kingdom of the Cíannachta Glinne Geimen, that is, the Cíannachta (a population group) of Glengiven in modern Co. Derry. The town of [Dungiven](https://www.logainm.ie/1411615.aspx), south of Limavady, and the barony of [Keenaght](https://www.logainm.ie/298.aspx) preserve elements of the kingdom’s name and its approximate territory. Kings of the Cíannachta Glinne Geimen are attested in the Irish annals from the sixth through to the twelfth century, although it is likely that many, if not all, would have been sub-kings to the king of Ailech.
 
-The actual, historical origins of Cíannachta Glinne Geimen as a polity are not at all clear (for recent discussion, see Patrick Gleeson’s article, ‘[Luigne Breg and the origins of the Uí Néill](https://www.jstor.org/stable/10.3318)’, pp. 1–5). However, Cíannachta was also an identity also claimed by a kingdom in the Irish midlands. This was the kingdom of the Cíannachta Breg, in modern Cos Louth and Dublin, reduced during the eighth century to Ard Cíannacht, which roughly corresponded to the modern barony of [Ferrard](https://www.logainm.ie/161.aspx). Medieval historiographers traced the Cíannachta of both kingdoms, as a people back, to Tadg, son of Cían. Tadg was a son of Ailill Aulomm, legendary ancestor of multiple royal dynasties Munster, who had come to the north to help Cormac mac Airt win back the kingship of Ireland from the Ulaid. This having been accomplished, Cormac granted him what would become the territory of the Cíannachta Breg, although Cormac allegedly cheated Tadg out of far more. The full story is related in the Middle Irish saga, [Cath Crinna](https://www.vanhamel.nl/codecs/Cath_Crinna).
+The actual, historical origins of Cíannachta Glinne Geimen as a polity are not at all clear (for recent discussion, see Patrick Gleeson’s article, ‘[Luigne Breg and the origins of the Uí Néill](https://www.jstor.org/stable/10.3318)’, pp. 1–5). However, Cíannachta was an identity also claimed by a kingdom in the Irish midlands. This was the kingdom of the Cíannachta Breg, in modern Cos Louth and Dublin, reduced during the eighth century to Ard Cíannacht, which roughly corresponded to the modern barony of [Ferrard](https://www.logainm.ie/161.aspx). Medieval historiographers traced the Cíannachta of both kingdoms, as a people, back to Tadg, son of Cían. Tadg was a son of Ailill Aulomm, legendary ancestor of multiple royal dynasties in Munster, who had come to the north to help Cormac mac Airt win back the kingship of Ireland from the Ulaid. This having been accomplished, Cormac granted him what would become the territory of the Cíannachta Breg, although Cormac allegedly cheated Tadg out of far more. The full story is related in the Middle Irish saga, [Cath Crinna](https://www.vanhamel.nl/codecs/Cath_Crinna).
 
 We begin our reading of the genealogies with Tadg’s offspring…
 
@@ -38,7 +36,7 @@ The following sections, in particular, are of relevance. Note that the manuscrip
 <th><b>Title in MS</b></th>
 </tr>
 <tr>
-  <th/><th colspan="2"><b>IrishGen FileName</b></th>
+  <th/><th colspan="2"><b>IrishGen Base URL</b></th>
 </tr>
 </thead>
 <tbody>
@@ -143,7 +141,7 @@ Here we encounter our first problem. Fiacha appears here as a son of Condla. In 
 
 > … Echach Binnig m Dubthaig m Bresail m Fhiachach **m Conlai**. m Taidc.
 
-What does this mean? It may well mean that the scribe of **R** simply made a mistake. However, it is our policy on IrishGen to take each manuscript version as seriously as possible; our data will then reveal what is an isolated mistake and what is an alternative tradition. Even so, we still have to make a decision as to whether “Fiacha son of Tadg” **([R §1351](http://www.ucc.ie/celt/published/G105003/text018.html))** and “Fiacha son of Condla” **([L](http://www.ucc.ie/celt/published/G800011F/text023.html)**, and elsewhere in **R**; e.g. **[R §1346](https://celt.ucc.ie/published/G105003/text018.html))** are the same person. They have the same name, different fathers, but the same descendants. The genealogist, at **([R §1351](http://www.ucc.ie/celt/published/G105003/text018.html))**, could have invented a third son of Tadg or be making an assertion about the existing Fiacha’s parentage.
+What does this mean? It may well mean that the scribe of **R** simply made a mistake. However, it is our policy on IrishGen to take each manuscript version as seriously as possible; our data will then reveal what is an isolated mistake and what is an alternative tradition. Even so, we still have to make a decision as to whether “Fiacha son of Tadg” **([R §1351](http://www.ucc.ie/celt/published/G105003/text018.html))** and “Fiacha son of Condla” **([L](http://www.ucc.ie/celt/published/G800011F/text023.html)**, and elsewhere in **R**; e.g. **[R §1346](https://celt.ucc.ie/published/G105003/text018.html))** are the same person. They have the same name, different fathers, but the same descendants. The genealogist, at **[R §1351](http://www.ucc.ie/celt/published/G105003/text018.html)**, could have invented a third son of Tadg or be making an assertion about the existing Fiacha’s parentage.
 
 One could argue it either way but, on the basis that there is more the same about them than is different, I predicated them as the same individual:
 
@@ -162,7 +160,7 @@ Our graph thus looks like this:
 
 *Data visualized with [GraphDB](https://www.ontotext.com/try-graphdb-se/)*
 
-This might seem trivial — one name out of many — but it should be remembered that genealogy was a means of asserting political claims and identity in the Middle Ages. As the genealogies in **L** and **R** go on to set out, Fiacha is the ancestor of the Cíannachta Breg and Findchad Ulach is the ancestor of the Cíannachta Glinne Geimen. Making them brothers establishes parity between the kingdoms; making one the son of the other asserts claims dominance. In other words, **R**’s “mistake” in **([§1351](http://www.ucc.ie/celt/published/G105003/text018.html))** has distinct partisan undertones.
+This might seem trivial — one name out of many — but it should be remembered that genealogy was a means of asserting political claims and identity in the Middle Ages. As the genealogies in **L** and **R** go on to set out, Fiacha is the ancestor of the Cíannachta Breg and Findchad Ulach is the ancestor of the Cíannachta Glinne Geimen. Making them brothers establishes parity between the kingdoms; making one the son of the other asserts claims dominance. In other words, **R**’s “mistake” at **[§1351](http://www.ucc.ie/celt/published/G105003/text018.html)** has distinct partisan undertones.
 
 ## Findchad Ulach: Names and Sobriquets
 Before we proceed towards the descendants of Findchad Ulach and the beginnings of the Cíannachta Glinne Geimen, there is an issue to resolve regarding Findchad himself. In most instances in the genealogies, he bears the sobriquet “Ulach” (spellings vary: “Ulag”, “Dulach” etc.). According to eDIL, this could mean “[bearded](http://www.dil.ie/43089)”, “[woodsman](http://www.dil.ie/43090)”, or even “[outlaw](http://www.dil.ie/43090)”. This appears to have caused some confusion in **[L](http://www.ucc.ie/celt/published/G800011F/text023.html)** (Text 1), however, where we find a pedigree that ends as follows:
@@ -175,11 +173,12 @@ Compare the corresponding pedigree in **R**, found in Text 2 (**[R §1354](http:
 
 “Fulig” is not the genitive form of any attested medieval Gaelic given name and it is suspiciously similar to “Fulig’s” son’s sobriquet elsewhere. At some point in the textual tradition, a scribe has misunderstood the name “Findchad Ulach” (presumably in the form “Findchada Ulig” or thereabouts) and has taken the sobriquet to be another name in the pedigree. The addition of hypercorrect “f” to words that historically began with vowels is a well-attested feature of Middle Irish (_c_. 900–1200), due to “f” being silent (due to lenition) in various grammatical contexts, including when preceded by a genitive singular, as here.
 
-This is clearly a mistake. Nonetheless, as mentioned, we have to take each manuscript version seriously. Therefore, in this situation, I added “Fulig” as a distinct individual in **L**’s Text 2:
+This is clearly a mistake. Nonetheless, as mentioned, we have to take each manuscript version seriously. Therefore, in this situation, I added “Fulig” as a distinct individual in **L**’s Text 2 and even hypothesised what the imagined nominative form might look like:
 
 ```
 <http://example.com/LL/clanna_ébir_i_l-leith_chuind.trig#Fulig>
   a foaf:Person;
+  irishRel:nomName "Fulech";
   irishRel:genName "Fulig";
   rel:childOf <#Conla-1644b090>.
 ```
@@ -203,7 +202,7 @@ Our graph thus looks like this:
 
 Several variants exist among the names of the eight sons. “Etchu” (**L**) versus “Cú” (**R**) could have arisen through the use of Latin _et_ (“and”) somewhere in the tradition, for example. In general, each name in one version has a name in the other version that is sufficiently similar for them to be predicated as the same. **L** and **R** (Text 1) also disagree on the name of the eight sons' father (“Findchad” versus “Findchán”) and on whether Fíac, son of Findchad Ulach, or Findchad Ulach himself is his father.  
 
-However, the idea in **L** (Text 1) that the eight sons' father is "Findchad, son of Fíac" is an outlier even within **L**. While **L** might here refer to Erc, son of Echen, son of Findchad, son of Findchad Ulach, **L** subsequently (Text 4) provides [a pedigree](https://celt.ucc.ie//published/G800011F/text049.html) that conforms in doctrine to **[R §1347](https://celt.ucc.ie/published/G105003/text018.html)**:
+The idea in **L** (Text 1) that the eight sons' father is "Findchad, son of Fíac" is an outlier even within **L**. While **L** might here refer to Erc, son of Echen, son of Findchad, son of Findchad Ulach, **L** subsequently (Text 4) provides [a pedigree](https://celt.ucc.ie//published/G800011F/text049.html) that conforms in doctrine to **[R §1347](https://celt.ucc.ie/published/G105003/text018.html)**:
 
 > … Eirc m Echin m Fhindchain (is eside cetna gab Glend Gaimen) m Fheic m Fhindchada Ulig ...
 > > … Erc, son of Echen, son of Findchán (he is the first who took Glengiven), son of Fíac, son of Findchad Ulach …
