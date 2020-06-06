@@ -5,8 +5,6 @@ title: Manuscript Variants and The Origins of Cíannachta Glinne Geimen
 author: et
 ---
 
-# Manuscript Variants and The Origins of Cíannachta Glinne Geimen
-
 {% assign author = site.data.authors[page.author]%}
 {{author.name}}
 
