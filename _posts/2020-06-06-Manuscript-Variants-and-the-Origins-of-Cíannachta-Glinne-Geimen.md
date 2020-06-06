@@ -126,7 +126,8 @@ We read in Text 1 in both manuscripts (**R** is quoted where there are no signif
 
 Cormac, ancestor of the Gailenga, does not concern us for the present purposes.
 
-##Condla’s Sons: The First Problem
+## Condla’s Sons: The First Problem
+
 Still according to both manuscripts, Condla also had two sons, Findchad Ulach and Fiacha **([R §1346](https://celt.ucc.ie/published/G105003/text018.html))**:
 
 > Condla dano m. Taidcg dá mc leis .i. Findchad Ulach & Fiachu.
