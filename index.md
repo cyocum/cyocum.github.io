@@ -14,8 +14,8 @@ information retrieval systems.
 If you have used IrishGen for your project and wish to publish a short
 paper on your experience or on an aspect of the intersection between
 early Medieval Ireland and information storage and retrieval
-techniques, please contact the email address at the bottom of this
-page.
+techniques, please contact the email address: <a
+href="mailto:cyocum@gmail.com">cyocum@gmail.com</a>.
 
 # Posts
 
