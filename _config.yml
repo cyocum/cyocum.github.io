@@ -27,7 +27,7 @@ github_username:  cyocum
 
 # Build settings
 markdown: kramdown
-remote_theme:  jekyll/minima 
+remote_theme: jekyll/minima 
 plugins:
   - jekyll-feed
 

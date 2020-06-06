@@ -1,10 +1,10 @@
 ---
 layout: post
-title: The Origins of Cíannachta Glinne Geimen
+title: Manuscript Variants and The Origins of Cíannachta Glinne Geimen
 author: et
 ---
 
-# The Origins of Cíannachta Glinne Geimen
+# Manuscript Variants and The Origins of Cíannachta Glinne Geimen
 
 {% assign author = site.data.authors[page.author]%}
 {{author.name}} 
