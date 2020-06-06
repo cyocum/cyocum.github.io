@@ -9,7 +9,7 @@ author: et
 {% assign author = site.data.authors[page.author]%}
 {{author.name}} 
 
-ORCID: <a href="https://orcid/{{ author.orcid }}" title="{{author.name}}">{{author.orcid}}</a>
+ORCID: <a href="https://orcid.org/{{ author.orcid }}" title="{{author.name}}">{{author.orcid}}</a>
 
 ## To what is this the beginning?
 This is the first of a series of blogposts that are intended to illustrate the kind of decisions we have to take when encoding medieval Irish genealogies as RDF, as well as what can be done with the results. This can get complicated and require editorial judgement. We are working, after all, with pre-modern manuscript sources. Their compilers are influenced by the political implications of the past, imagined or otherwise, in their own society and struggling to understand the textual tradition in which they worked.  
