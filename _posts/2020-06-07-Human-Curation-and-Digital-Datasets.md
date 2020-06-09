@@ -42,7 +42,7 @@ extant rather than attempting to editorialise.
 
 The first point is digital curation of historical material is not a
 new subject.  The [University of Edinburgh's](https://www.ed.ac.uk/)
-[Digital Duration Centre](https://www.dcc.ac.uk/) is entirely devoted
+[Digital Curation Centre](https://www.dcc.ac.uk/) is entirely devoted
 to the curation and preservation of digital artefacts.  Additionally,
 the [International Journal of Digital Curation](http://www.ijdc.net/)
 is one forum for discussion of these issues.  Other fora can be found
