@@ -209,20 +209,22 @@ rel:childOf <#laCummine>.
 
 This utility works by having the first ten numerals in [Old
 Irish](http://www.worldcat.org/oclc/899506131) directly encoded within
-it.  It then splits on the ".i." to separate the parent from the
-children.  Subsequently, it splits on the "mc" (or a few other
-variants that have been encountered in the sources).  The numeral
-which comes before the "m" becomes the `numChild`, the numeral is
-matched to the Old Irish word and translated into a more familiar
-Arabic numeral, while the rest of the parent indicator becomes the
-name.  As one will notice with `irishRel:genName "la Cummine"` this
-causes the incorrect name to be generated so human intervention is
-necessary to clean up the output before integrating it into the
-dataset.  Additionally, if there are multiple URLs with the same
-structure, human intervention with be needed to enforce uniqueness.
-The method of creating URLs for individuals will be covered in a
-following post. The rest is slotting the children and parent into
-their RDF templates then outputting the result.
+it.  This encoding of the numeral is very literal and does not account
+for varient spellings of any kind at the moment.  The utility then
+splits on the ".i." to separate the parent from the children.
+Subsequently, it splits on the "mc" (or a few other variants that have
+been encountered in the sources).  The numeral which comes before the
+"m" becomes the `numChild`, the numeral is matched to the Old Irish
+word and translated into a more familiar Arabic numeral, while the
+rest of the parent indicator becomes the name.  As one will notice
+with `irishRel:genName "la Cummine"` this causes the incorrect name to
+be generated so human intervention is necessary to clean up the output
+before integrating it into the dataset.  Additionally, if there are
+multiple URLs with the same structure, human intervention with be
+needed to enforce uniqueness.  The method of creating URLs for
+individuals will be covered in a following post. The rest of
+processing done by the utility is slotting the children and parent
+into their RDF templates then outputting the result.
 
 Another area of automation is the way in which the database is stored.
 Because the files are stored in text file format for RDF called
