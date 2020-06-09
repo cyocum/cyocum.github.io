@@ -38,7 +38,7 @@ the policy of IrishGen is to take all statements in the manuscript
 tradition seriously.  Thus, the curators attempt to preserve what is
 extant rather than attempting to editorialise.
 
-## Ditigal Curation and Data Governance
+## Digital Curation and Data Governance
 
 The first point is digital curation of historical material is not a
 new subject.  The [University of Edinburgh's](https://www.ed.ac.uk/)
@@ -70,13 +70,24 @@ source to check on possible transcription errors originating from the
 translation of the information from manuscript to printed source to
 digital source.
 
+For a more concrete example, a curator with data curation experience
+would assist other curators when setting policy for different RDF
+constructs concerning where and when to use them and help communicate
+those policies to other curators or other contributors.  The data
+curation expert would also help create tools and policies concerning
+data quality and data integrity.  For instance, reading, reviewing,
+and when necessary changing data so that it conforms to best practice,
+such as the [W3C](https://www.w3.org) [Data on the Web Best
+Practices](https://www.w3.org/TR/dwbp/) and [Linked Data Platform Best
+Practices and Guidelines](https://www.w3.org/TR/ldp-bp/).
+
 Unfortunately, due to lack of resources and lack of time on the
 current curators' part, the insights from these two disciplines have
 not been explored in detail.  When creating databases like IrishGen,
 having a curator or a willing volunteer from one of these disciplines
-can be a boon to disrupting patterns of error before they reach a
-point at which an end user, such as a scholar or other interested party,
-encounters the data.
+can be a boon to disrupting patterns of error and encouraging best
+practice before the data reaches a point at which an end user, such as
+a scholar or other interested party, encounters the data.
 
 ## Automation
 
@@ -111,7 +122,50 @@ IrishGen has a tool for doing some of this.  It is up to the curator
 to integrate the output into the file that they are working on and
 find any links between the individuals in the String Pedigree and
 other parts of the database.  This integration process is a human
-intervention and can cause errors to creep in.
+intervention and can cause errors to creep in.  For instance, using
+the utility
+[name-list.pl](https://github.com/cyocum/irish-gen/blob/master/utils/name-list.pl)
+from IrishGen itself, the sequence of actions is (the output is
+truncated for the reader's convenience):
+
+```bash
+➜  irish-gen git:(master) ✗ perl -CA utils/name-list.pl "Flaithbertach m Crunmael m Commáin m Fhinain m Faigfhir m Ernine m Feic m. Ieir m Gussa m Fobrich m Maeil m. Ainmerech m Fir Roith m Muine m Fir Nued m Fir Lugdach m Buain m Argatibair m Corpri Cluchechair m Con Corbb"
+<#Flaithbertach>
+a foaf:Person;
+irishRel:nomName "Flaithbertach";
+rel:childOf <#Crunmael>.
+
+<#Crunmael>
+a foaf:Person;
+irishRel:genName "Crunmael";
+rel:childOf <#Commáin>.
+
+<#Commáin>
+a foaf:Person;
+irishRel:genName "Commáin";
+rel:childOf <#Fhinain>.
+
+<#Fhinain>
+a foaf:Person;
+irishRel:genName "Fhinain";
+rel:childOf <#Faigfhir>.
+
+<#Faigfhir>
+a foaf:Person;
+irishRel:genName "Faigfhir";
+rel:childOf <#Ernine>.
+...
+```
+
+One thing to note here is that the utilities may evolve and change
+over time to become more sophisticated depending or even be deleted
+entirely based on the interests and needs of those involved.
+
+The way in which this works is to split the String Pedigree by the "m"
+or other textual means of indicating "son of". The list of names is
+then ordered and slotted into a template which is then appended to the
+output.  Once the program has reached the last name in the list, it
+outputs the results.
 
 The second point of automation is the numerical components of
 pedigrees, for instance from LL's [Genelach h-Úa
@@ -122,7 +176,46 @@ Trí mc la Cummine .i. Laidcnén. Conandil. Suibne.
 ```
 
 The utility can recognise up to the number ten and produce snippets of
-RDF for the curator to integrate into the database.
+RDF for the curator to integrate into the database.  For instance,
+using IrishGen's
+[numbered.pl](https://github.com/cyocum/irish-gen/blob/master/utils/numbered.pl):
+
+```bash
+➜  irish-gen git:(master) ✗ perl -CA utils/numbered.pl "Trí mc la Cummine .i. Laidcnén. Conandil. Suibne."
+<#laCummine>
+ a foaf:Person;
+irishRel:genName "la Cummine";
+irishRel:numChild 3.
+
+<#Laidcnén>
+ a foaf:Person;
+irishRel:nomName "Laidcnén";
+rel:childOf <#laCummine>.
+
+<#Conandil>
+ a foaf:Person;
+irishRel:nomName "Conandil";
+rel:childOf <#laCummine>.
+
+<#Suibne>
+ a foaf:Person;
+irishRel:nomName "Suibne";
+rel:childOf <#laCummine>.
+```
+
+This utility works by having the first ten numerals in [Old
+Irish](http://www.worldcat.org/oclc/899506131) directly encoded within
+it.  It then splits on the ".i." to separate the parent from the
+children.  Subsequently, it splits on the "mc" (or a few other
+variants that have been encountered in the sources).  The numeral
+which comes before the "m" becomes the `numChild`, the numeral is
+matched to the Old Irish word and translated into a more familiar
+Arabic numeral, while the rest of the parent indicator becomes the
+name.  As one will notice with `irishRel:genName "la Cummine"` this
+causes the incorrect name to be generated so human intervention is
+necessary to clean up the output before integrating it into the
+dataset.  The rest is slotting the children and parent into their RDF
+templates then outputting the result.
 
 Another area of automation is the way in which the database is stored.
 Because the files are stored in text file format for RDF called
@@ -144,7 +237,8 @@ the data is merged.
 
 ## Peer Review
 
-Another method used is peer review.  Using the Github Pull Request
+Another method used is peer review.  Using the Github [Pull
+Request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests)
 (sometimes also called Merge Request), changes to the data can be
 reviewed before it is merged into the dataset as the current version.
 The pre-modern scribes and redactors also took a peer review approach
@@ -164,6 +258,8 @@ review.  This can also happen when another curator is working and the
 head curator is not available.  Additionally, as the dataset is
 publicly available,
 [forking](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project)
+(see also Github ["Fork a
+repo"](https://help.github.com/en/github/getting-started-with-github/fork-a-repo))
 is a possibility for changing the dataset.
 
 While peer review is a time honoured method to attempt to stop errors
@@ -189,7 +285,7 @@ However, due to the structure of the data, errors can be detected more
 easily if the visualisation does not make sense.  Many times this can
 be identified as a cyclical structure in the descendants of an
 individual where one of the descendants ends up being both an indirect
-and direct descendant of an individual.  In otherwords, a decendant
+and direct descendant of an individual.  In other words, a descendant
 several generations away from their ancestor is also encoded as their
 direct ancestor which creates a cyclical structure in the genealogy.
 This visual inspection is the basis for Thansich's previous article
