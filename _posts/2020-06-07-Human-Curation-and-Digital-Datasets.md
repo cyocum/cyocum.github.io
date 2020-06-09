@@ -253,14 +253,12 @@ Again, this process is constrained by the curator time available.  For
 IrishGen to move forward and avoid stagnation, lack of peer review
 cannot be a barrier to continued development.  Thus practical
 flexibility is necessary.  If there is no peer reviewer available then
-the head curator can just merge changes into the dataset without
-review.  This can also happen when another curator is working and the
-head curator is not available.  Additionally, as the dataset is
-publicly available,
+the curator can just merge changes into the dataset without review.
+Additionally, as the dataset is publicly available,
 [forking](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project)
 (see also Github ["Fork a
 repo"](https://help.github.com/en/github/getting-started-with-github/fork-a-repo))
-is a possibility for changing the dataset.
+is another possibility for changing the dataset.
 
 While peer review is a time honoured method to attempt to stop errors
 from entering a collaborative work, like the early Irish genealogies
