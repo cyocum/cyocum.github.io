@@ -95,7 +95,7 @@ Unlike the scribes and redactors of medieval Ireland, who mainly
 relied on repetition and structure to reduce errors, IrishGen relies
 on the structure to create automated tools to encode digital versions
 of the genealogies, most prominently the CELT digital versions of
-diplomatic transcriptions, into
+semi-diplomatic transcriptions, into
 [RDF](http://www.w3.org/TR/rdf11-primer/).
 
 However, automation is no panacea as even slight variations in the
@@ -175,6 +175,10 @@ Lomthuile](https://celt.ucc.ie/published/G800011F/text002.html):
 Trí mc la Cummine .i. Laidcnén. Conandil. Suibne.
 ```
 
+```
+Three sons with Cummin .i. Laidcnén. Conandil. Suibne.
+```
+
 The utility can recognise up to the number ten and produce snippets of
 RDF for the curator to integrate into the database.  For instance,
 using IrishGen's
@@ -214,8 +218,11 @@ Arabic numeral, while the rest of the parent indicator becomes the
 name.  As one will notice with `irishRel:genName "la Cummine"` this
 causes the incorrect name to be generated so human intervention is
 necessary to clean up the output before integrating it into the
-dataset.  The rest is slotting the children and parent into their RDF
-templates then outputting the result.
+dataset.  Additionally, if there are multiple URLs with the same
+structure, human intervention with be needed to enforce uniqueness.
+The method of creating URLs for individuals will be covered in a
+following post. The rest is slotting the children and parent into
+their RDF templates then outputting the result.
 
 Another area of automation is the way in which the database is stored.
 Because the files are stored in text file format for RDF called
@@ -287,7 +294,8 @@ and direct descendant of an individual.  In other words, a descendant
 several generations away from their ancestor is also encoded as their
 direct ancestor which creates a cyclical structure in the genealogy.
 This visual inspection is the basis for Thansich's previous article
-and for his current work on IrishGen.
+and for his current work on IrishGen.  An concrete example of this
+will be covered in a future post.
 
 The audit approach is manual and labour intensive.  While invaluable,
 it is not a sustainable process as it heavily relies on people who are
