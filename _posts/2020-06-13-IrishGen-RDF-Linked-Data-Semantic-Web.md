@@ -40,34 +40,34 @@ definied by the [World Wide Web Consortium](https://www.w3.org) which
 is meant to represent data on the World Wide Web.  The RDF
 specification sets the theoretical underpinning for data on the web
 and thus the way that data is handled in IrishGen.  The form and
-format of IrishGen all flow from this one specification and it 
+format of IrishGen all flow from this one specification.
 
 RDF defines a particular kind of graph database which is also known as
 a Knowledge Graph (see "[Knowledge
 Graphs](https://arxiv.org/abs/2003.02320)" for an extremely
 comprehensive and detailed introduction to the topic).  The structure
-is relatively simple with only three active elements: the subject, the
-predicate, and the object.  These three elements are defined and
-combined in different ways to create a flexible way to represent data.
-One of the more odd features of RDF is that everything is a
-[URL](https://url.spec.whatwg.org/), which can cause initial
-confusion.
+of RDF is relatively simple with only three active elements: the
+subject, the predicate, and the object.  These three elements are
+defined and combined in different ways to create a flexible way to
+represent data.  One of the more odd features of RDF is that
+everything is a [URL](https://url.spec.whatwg.org/), which can cause
+initial confusion.
 
 While RDF is a theoretical construct, a means of expressing this
-consruct was necessary.  For this, several file formats (also known as
+consruct is necessary.  For this, several file formats (also known as
 "serializations") which conform to the framework were created.  Among
 the most common are:
 [RDF/XML](https://www.w3.org/TR/rdf-syntax-grammar/),
 [Notation3](https://www.w3.org/TeamSubmission/n3/),
 [Turtle](https://www.w3.org/TR/turtle/),
-[TRiG](https://www.w3.org/TR/trig/),
+[TRiG](https://www.w3.org/TR/trig/), and
 [JSON-LD](https://www.w3.org/TR/json-ld/).  The curators chose TRiG as
 the file format but it can be automatically translated into any of the
 other formats as needed.
 
 ## RDF Formats and IrishGen: An Example
 
-An example fragment which is [adapted from
+An example in Notation3 format which is [adapted from
 IrishGen](https://github.com/cyocum/irish-gen/blob/master/LL/dal_corpri_arad.trig)
 will help to see what the above is in practice:
 
@@ -88,21 +88,22 @@ not confused.  URLs are always surrounded by `<` and `>` to
 distinguish them from other forms of text that may appear in the file.
 
 The first line is the subject of the RDF statement.  If one thinks of
-this as a sentence, the first URL is in the subject position.  This is
-the URL about which the statement makes an assertion (for a more
-formal defintion of terms like TBox and ABox, see [Handbook of
-Knowledge Representation](http://www.worldcat.org/oclc/968676609) ).
-The subject can be any URL, even one that you cannot dereference, as
-in the instance above `http://example.com` is a dummy URL, which the
+this as a sentence in a SVO language, the first URL is in the subject
+position.  This is the URL about which the statement makes an
+assertion (for a more formal defintion of terms like TBox and ABox,
+see [Handbook of Knowledge
+Representation](http://www.worldcat.org/oclc/968676609) ).  The
+subject can be any URL, even one that you cannot dereference, as in
+the instance above `http://example.com` is a dummy URL, which the
 curators chose as they do not have the resources to maintain a website
 at the current time.  The reason that this works is due to RDF's Open
 World Assumption (see [Artificial Intelligence: A Modern
 Approach](http://www.worldcat.org/oclc/1021874142), pp. 208-385) which
 means that a RDF aware computer system reading this will assume that
 `http://example.com/LL/dal_corpri_arad.trig#Flaithbertach` exists
-irrespective of its availability at the time the system becomes aware
-of it.  This can cause some problems which will be covered at the end
-of this post.
+irrespective of its availability on the web at the time the system
+becomes aware of it.  This can cause some problems which will be
+covered at the end of this post.
 
 The second line is the predicate of the RDF statement.  Much thought
 and discussion goes into this element of a quad as it contains within
@@ -115,11 +116,11 @@ to use RDF over any other graph database technology.
 The third line is the object of the RDF statement.  This is the effect
 that applying the predicate will have on the subject.  In some cases
 this can be as simple as giving the subject a static label (such as
-given the proper nominal of their forename) and in more complex cases
-can involve other subjects elsewhere defined on the web.
+given the proper nominative of their forename) and in more complex
+cases can involve other subjects elsewhere defined on the web.
 
-The effect of these four statements when translated into English is
-"In LL, Flaithbertach is a person".  While this might seem trite in
+The effect of these four statements above when translated into English
+is "In LL, Flaithbertach is a person".  While this might seem trite in
 English, it is very important to distinguish Flaithbertach from any
 other kind of thing that may exist on the web.
 
@@ -199,7 +200,7 @@ While all of the above deals with file formats and defining data,
 actually searching that data is notibly absent.  Searching collections
 of RDF datasets involves the use of a database technology called a
 Triplestore.  There are many open source and commercial Triplestores
-in use but the IrishGen is generally used with
+in use but IrishGen is generally used with
 [GraphDB](https://www.ontotext.com/products/graphdb/) or
 [Stardog](https://www.stardog.com/).  Querying RDF is a deep and
 complicated subject that will be reserved for another post where the
@@ -224,8 +225,9 @@ to those which may be of interest to readers.
 
 Human error is the bane for may digital curation projects.  IrishGen
 is no less effected.  While typos are generally an annoyance, in
-IrishGen, they can cause entire systems to go awry.  A case in point,
-a vast number of the entries in IrishGen have the form below:
+IrishGen and RDF generally, they can cause entire systems to go awry.
+A case in point, a vast number of the entries in IrishGen have the
+form below:
 
 ```turtle
 <#Flaithbertach>
@@ -238,8 +240,8 @@ This states that Flaithbertach is a person who has the nominative name
 Flaithbertach and is the child of someone called Crunmael.  While
 automated generation of this entry can help (as discussed in [Human
 Curation and Digital Datasets: A Problem in Multiple
-Parts]({{site.baseurl}}/2020/06/07/Human-Curation-and-Digital-Datasets.html))
-but this still requires human intervention and thus the possibility of
+Parts]({{site.baseurl}}/2020/06/07/Human-Curation-and-Digital-Datasets.html)),
+this still requires human intervention and thus the possibility of
 error.  If an error is introduced of the form:
 
 ```
@@ -291,6 +293,16 @@ of Crumael will be assumed by the system.  In fact, in the face of
 reasoning and the `rel` ontology, he will also be assumed to be a
 person.  While this can be useful, it can also create "ghost
 individuals" who exist only because a human made a mistake somewhere.
+Additionally, if there are two individuals with the same name and thus
+the same URL, a completely skewed graph can result because the
+Triplestore will assume they are referring to the same person.  The
+curators avoid this siutation generally by appending a random fragment
+of a universally unique identifier (UUID, for a formal definition, see
+[RFC 4122](https://www.ietf.org/rfc/rfc4122.txt)) to the URL to
+distinguish between two individuals with the same name.  However,
+occationally the UUID fragment will be missed during the creation of
+the URL and two seperate people will be accidentally merged together,
+which is the inverse of the "ghost person" problem.
 
 The most difficult and insidious form of error that can occur is the
 `owl:sameAs` error.  One of the most useful things IrishGen can do is
@@ -319,11 +331,11 @@ in which an error was introduced either by another human or by an
 automated process which as gone awry.  These errors can cause anything
 from minor annoyance while going about daily activities to
 catastrophic life altering consequences.  There is, in effect, no
-avoiding error; the possibility of error can only be minimized.  This
-minimization is effected by the availability of resource and skill
-while curating the dataset either in an automated or manual fashion.
-In the case of IrishGen, resources are very limited so user
-expectations should be set accordingly.
+avoiding error; the possibility of error can only be minimized.  The
+amount of minimization that can be done is effected by the
+availability of resource and skill while curating the dataset either
+in an automated or manual fashion.  In the case of IrishGen, resources
+are very limited so user expectations should be set accordingly.
 
 ## Conclusion
 
