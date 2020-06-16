@@ -273,7 +273,7 @@ name (in the nominative case) Flaithbertach and is the child of a
 person denoted by the URL `<#Crunmael>`.  While automated generation
 of this entry can help (as discussed in [Human Curation and Digital
 Datasets: A Problem in Multiple
-Parts]({{site.baseurl}}/2020/06/07/Human-Curation-and-Digital-Datasets.html)),
+Parts]({% post_url 2020-06-13-IrishGen-RDF-Linked-Data-Semantic-Web %})),
 this still requires human intervention and thus the possibility of
 error.  If an error is introduced of the form:
 
@@ -303,7 +303,7 @@ curated database, it can be very frustrating and confidence draining.
 There is not much that can be done for this kind of problem overall.
 More careful curators and automation can decrease the occurance as
 discussed in "[Human Curation and Digital
-Datasets]({{site.baseurl}}/2020/06/07/Human-Curation-and-Digital-Datasets.html)"
+Datasets]({% post_url 2020-06-13-IrishGen-RDF-Linked-Data-Semantic-Web %})"
 but this will never fully elimiate the possibility.
 
 Another form of error can cause real problems in a system.  Take the
