@@ -275,7 +275,7 @@ name (in the nominative case) Flaithbertach and is the child of a
 person denoted by the URL `<#Crunmael>`.  While automated generation
 of this entry can help (as discussed in [Human Curation and Digital
 Datasets: A Problem in Multiple
-Parts]({% post_url 2020-06-13-IrishGen-RDF-Linked-Data-Semantic-Web %})),
+Parts]({% post_url 2020-06-07-Human-Curation-and-Digital-Datasets %})),
 this still requires human intervention and thus the possibility of
 error.  If an error is introduced of the form:
 
@@ -306,7 +306,7 @@ draining.
 There is not much that can be done for this kind of problem overall.
 More careful curators and automation can decrease the occurrence as
 discussed in "[Human Curation and Digital
-Datasets]({% post_url 2020-06-13-IrishGen-RDF-Linked-Data-Semantic-Web %})"
+Datasets]({% post_url 2020-06-07-Human-Curation-and-Digital-Datasets %})"
 but this will never fully eliminate the possibility.
 
 Another form of error can cause real problems in a system.  The more
