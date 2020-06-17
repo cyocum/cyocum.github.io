@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2020-06-13
+date: 2020-06-17
 title: "IrishGen: RDF, Linked Data, and The Semantic Web"
 author: cgy
 ---
