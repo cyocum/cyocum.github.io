@@ -54,7 +54,7 @@ everything is a [URL](https://url.spec.whatwg.org/), which can cause
 initial confusion.
 
 While RDF is a theoretical construct, a means of expressing this
-consruct is necessary.  For this, several file formats (also known as
+construct is necessary.  For this, several file formats (also known as
 "serializations") which conform to the framework were created.  Among
 the most common are:
 [RDF/XML](https://www.w3.org/TR/rdf-syntax-grammar/),
@@ -84,7 +84,7 @@ of text that may appear in the file.
 The first line is the subject of the RDF statement.  If one thinks of
 this as a sentence in a SVO language, the first URL is in the subject
 position.  This is the URL about which the statement makes an
-assertion (for a more formal defintion of terms like TBox and ABox,
+assertion (for a more formal definition of terms like TBox and ABox,
 see [Handbook of Knowledge
 Representation](http://www.worldcat.org/oclc/968676609) ).  The
 subject can be any URL, even one that you cannot dereference, as in
@@ -129,14 +129,14 @@ section to the triple:
 
 This is also known as a [RDF
 Dataset](https://www.w3.org/TR/rdf11-concepts/#section-dataset) of
-which TRiG is the seralisation and itself a small extension of the
-Turtal format.  In IrishGen, this is used to organize triples by the
+which TRiG is the serialisation and itself a small extension of the
+Turtle format.  In IrishGen, this is used to organise triples by the
 MS in which the triple appears and allows queries to target just
 certain MS rather than the entire dataset at once.
 
 A note on the URLs used in IrishGen for individuals who appear in the
 genealogies will assist the reader at this point.  When a curator is
-translating (manually or by automation) a geneaology to create Linked
+translating (manually or by automation) a genealogy to create Linked
 Data, a new URL must be coined for each individual instance of a name
 which appears in the source material.  This does not give that
 individual any information beyond what is declared.  Thus, for
@@ -145,17 +145,18 @@ person" but it is more formally stated as "In the graph pointed to by
 the URL <http://exmaple.com/LL>, the URL
 <http://example.com/LL/dal_corpri_arad.trig#Flaithbertach> exists and
 is declared to be an RDF class <http://xmlns.com/foaf/0.1/Person>",
-which is far more combersome way of stating the facts.  They are, in
+which is far more cumbersome way of stating the facts.  They are, in
 effect, a nameless person.  This is why the reader will see names
 explicitly attached to a URL.  One of the additional benefits of this
 is that different forms of a name can be recorded without needing to
-coin a new URL for each.
+coin a new URL for each and is explicitly attached to a URL via a
+separate triple.
 
-Moreover, an individual's URL also be read.  First, the
+Moreover, an individual's URL can also be read.  First, the
 `http://example.com` can be ignored as it is just a way for accounting
 for a base URL that is needed for the system as a whole to work.  The
 second element `LL` denotes the MS that holds the information
-described, which is in addition to the quad URL which also denoates
+described, which is in addition to the quad URL which also denotes a
 MS.  A URL is just a string with a certain format to a Linked Data
 system and thus the fourth element of a quad is added to allow the
 system to manipulate things at the level of a MS. Then, the second
@@ -163,8 +164,8 @@ element is the directory which holds the TRiG file in the [Git
 repository](https://github.com/cyocum/irish-gen/tree/master/LL).  The
 final element is a slightly reformatted version of the title of the
 _item_ which holds the individual (for the item structure of the
-genealogies, see Holmberg, '[Towards a Relative Chronology of the
-Milesian Genealogical
+genealogies, see [Holmberg](http://isni.org/isni/0000000419902696),
+'[Towards a Relative Chronology of the Milesian Genealogical
 Scheme](https://dash.harvard.edu/handle/1/37945002)', pp. 17-18).  The
 data, of course, is inside the file.  This is useful when searching as
 many systems will give the full URL for what they find and the user
@@ -215,13 +216,14 @@ Edition)](https://www.w3.org/TR/owl2-overview/) for version two).  For
 all practical purposes, OWL 2 is the _de facto_ source for all
 predicates in IrishGen even if they are declared with an RDFS URL.
 
-The curators have modified various publically avaliable ontologies and
+The curators have modified various publicly available ontologies and
 created a few of their own to more accurately model the situation in
-the medieval Irish genealogical source material.  For instance,
- the curators created the idea of `PopulationGroup` which are fairly
-common entities in the geneaologies and the ability of persons to be
-ancestors or decendants of these groups (for implementations of these
-predicates and other predicates see the [Early Irish Relationships
+the medieval Irish genealogical source material.  For instance, the
+curators created the RDF class: `PopulationGroup`. Population Groups
+are fairly common entities in the genealogies and the ability of
+persons to be ancestors or descendants of these groups (for
+implementations of these predicates and other predicates see the
+[Early Irish Relationships
 Ontology](https://github.com/cyocum/irish-gen/blob/master/earlyIrishRelationship.ttl)).
 
 Ontologies allow new predicates to be added and thus new things to be
@@ -229,7 +231,7 @@ expressed about data in a RDF dataset.
 
 A brief aside concerning databases will be useful at this point.
 While all of the above deals with file formats and defining data,
-actually searching that data is notibly absent.  Searching collections
+actually searching that data is notably absent.  Searching collections
 of RDF datasets involves the use of a database technology called a
 Triplestore.  There are many open source and commercial Triplestores
 in use but IrishGen is generally used with
@@ -239,17 +241,17 @@ complicated subject that will be reserved for another post where the
 implications can be properly explored in depth.
 
 The foregoing demonstrate in a microcosm how the curators of IrishGen
-use RDF and its seralisations to organise medieval Irish geneaological
+use RDF and its seralisations to organise medieval Irish genealogical
 information.  This, of course, is just one small sample of the
-information avaliable within IrishGen.  However, this should orient
+information available within IrishGen.  However, this should orient
 and assist the reader when they encounter the IrishGen in its file
 format.  The rest of this post will be devoted to the various kinds of
-errors and difficulies that a reader and curator can encounter when
+errors and difficulties that a reader and curator can encounter when
 using the dataset.
 
 ## Difficulties and Challenges of Using RDF
 
-Now the reader is aquainted with the various parts of RDF and its
+Now the reader is acquainted with the various parts of RDF and its
 ecosystem of terms.  The choices made do not come without cost and
 without their own challenges.  This section will explore some of the
 choices that IrishGen has encountered over the years and give some
@@ -294,20 +296,21 @@ of this is that now Flaithbertach is not the child of Crunmael and
 when searched for under its proper form, `childOf`, it will not
 appear.  The system is broken and if this is in a complex query,
 incorrect results will be returned to the user.  The old adage
-"Garbage In, Garbage Out" but it is more serious because given the
-complex nature of some of the queries, the data can look at first
-sight as not garbage but still cause serious problems. For a user who
-is not adept with computers and is not ready to expect this in a human
-curated database, it can be very frustrating and confidence draining.
+"Garbage In, Garbage Out" still applies but it is more serious in this
+case because given the complex nature of some of the queries, the data
+can look correct at first sight but still cause serious problems. For
+a user who is not adept with computers and is not ready to expect this
+in a human curated database, it can be very frustrating and confidence
+draining.
 
 There is not much that can be done for this kind of problem overall.
-More careful curators and automation can decrease the occurance as
+More careful curators and automation can decrease the occurrence as
 discussed in "[Human Curation and Digital
 Datasets]({% post_url 2020-06-13-IrishGen-RDF-Linked-Data-Semantic-Web %})"
-but this will never fully elimiate the possibility.
+but this will never fully eliminate the possibility.
 
-Another form of error can cause real problems in a system.  Take the
-below more fleshed out version:
+Another form of error can cause real problems in a system.  The more
+fleshed out version below:
 
 ```turtle
 @base <http://example.com/LL/dal_corpri_arad.trig> .
@@ -325,22 +328,23 @@ system that can parse the TRiG file format.  The file above translated
 informally, taking into consideration as explained above that the URLs
 are not themselves people with names, into English states: "In LL,
 Flaithbertach is a person and is the child of Crunmael".  As the
-astute reader will have noticed, Crunmael is nowhere mentioned.  Due
-to the Open World Assumption, the existence of Crumael will be assumed
-by the system.  In fact, in the face of reasoning and the `rel`
-ontology, he will also be assumed to be a person.  While this can be
-useful, it can also create "ghost individuals" who exist only because
-a human made a mistake somewhere.  Additionally, if there are two
-individuals with the same name in the same item and thus in the same
-file with the same URL, a completely skewed graph can result because
-the Triplestore will assume they are referring to the same person.
-The curators avoid this siutation generally by appending a random
-fragment of a universally unique identifier (UUID, for a formal
-definition, see [RFC 4122](https://www.ietf.org/rfc/rfc4122.txt)) to
-the URL to distinguish between two individuals with the same name.
-However, occasionally the UUID fragment will be missed during the
-creation of the URL and two seperate people will be accidentally
-merged together, which is the inverse of the "ghost person" problem.
+astute reader will have noticed, Crunmael himself, as a separate
+person, is nowhere mentioned.  Due to the Open World Assumption, the
+existence of Crumael will be assumed by the system.  In fact, in the
+face of reasoning and the `rel` ontology, he will also be assumed to
+be a person.  While this can be useful, it can also create "ghost
+individuals" who exist only because a human made a mistake somewhere.
+Additionally, if there are two individuals with the same name in the
+same item and thus in the same file with the same URL, a completely
+skewed graph can result because the Triplestore will assume they are
+referring to the same person.  The curators avoid this situation
+generally by appending a random fragment of a universally unique
+identifier (UUID, for a formal definition, see [RFC
+4122](https://www.ietf.org/rfc/rfc4122.txt)) to the URL to distinguish
+between two individuals with the same name.  However, occasionally the
+UUID fragment will be missed during the creation of the URL and two
+separate people will be accidentally merged together, which is the
+inverse of the "ghost person" problem.
 
 The most difficult and insidious form of error that can occur is the
 `owl:sameAs` error.  One of the most useful things IrishGen can do is
@@ -359,12 +363,12 @@ mislead, in the worst, a user.  Triplestores can [in some cases
 explain
 why](https://www.stardog.com/docs/#_explaining_reasoning_results) it
 returned a graph of such a form but more often than not, no
-explanation is avaliable and it is up to the user or curator examine
-the string of reasoning that caused such a result.  This situation is
-caused by the curators and their understanding and interpretation of
-the source material and sometimes curators make mistakes or
-misunderstand the material.  When this occurs, the dataset can be and
-most likely will be amended, unlike a book such as [Corpus
+explanation is available and it is up to the user or curator to
+examine the string of reasoning that caused such a result.  This
+situation is caused by the curators and their understanding and
+interpretation of the source material and sometimes curators make
+mistakes or misunderstand the material.  When this occurs, the dataset
+can be and most likely will be amended, unlike a book such as [Corpus
 Genealogiarum Hiberniae](http://www.worldcat.org/oclc/911333553).
 However, this can also cause a user to lose confidence in the
 integrity of the dataset.
@@ -375,8 +379,8 @@ in which an error was introduced either by another human or by an
 automated process which as gone awry.  These errors can cause anything
 from minor annoyance while going about daily activities to
 catastrophic life altering consequences.  There is, in effect, no
-avoiding error; the possibility of error can only be minimized.  The
-amount of minimization that can be done is effected by the
+avoiding error; the possibility of error can only be minimised.  The
+amount of minimisation that can be done is effected by the
 availability of resource and skill while curating the dataset either
 in an automated or manual fashion.  In the case of IrishGen, resources
 are very limited so user expectations should be set accordingly.
@@ -390,7 +394,7 @@ Additionally, some of the errors that may creep into the dataset due
 to human error were explored to warn the reader about potential
 pitfalls in the dataset itself.  This should give the reader the
 confidence to begin to read the files in the dataset and to understand
-the breadth and depth of information avaliable.  A future post will
+the breadth and depth of information available.  A future post will
 explore the options for performing structured queries on the dataset
 and how Triplestores work from a user's point of view, which will
 equip the reader to appreciate what these technologies can do for
