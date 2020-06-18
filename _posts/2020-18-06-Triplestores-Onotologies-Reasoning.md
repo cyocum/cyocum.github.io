@@ -22,13 +22,13 @@ static set of text files which conform to a certain format that is
 readable by computers and, to a degree, humans.  While this is useful
 in itself, one can use text based string matching system like
 [grep](https://www.gnu.org/software/grep/) to quickly search the files
-for relevant information, it is suboptimal and better systems exist.
+for relevant information, it is sub-optimal and better systems exist.
 [Tim Berners-Lee](https://orcid.org/0000-0003-1279-3709)'s original
 vision for the Semantic Web was a software agent that would crawl the
 web then using the structured information retrieved, answer user's
 queries on the web (see ["Whatever Happened to the Semantic
 Web?"](https://twobithistory.org/2018/05/27/semantic-web.html)).  To
-be able to fulfill this vision, the software agent would need a
+be able to fulfil this vision, the software agent would need a
 storage facility to store the found information.  Once the information
 was gathered the software agent would then need a query system for the
 user to ask their questions.[^1] These two systems exist: Triplestore
@@ -96,7 +96,7 @@ On the other hand, Stardog takes a much more traditional command line
 driven approach with the `stardog data add` command (see [Command Line
 Interface](https://www.stardog.com/docs#_command_line_interface)).
 
-## OWL 2 and Logical Inferrencing (Reasoning)
+## OWL 2 and Logical Inference (Reasoning)
 
 As briefly discussed in ["IrishGen: RDF, Linked Data, and The Semantic
 Web"]({% post_url 2020-06-17-IrishGen-RDF-Linked-Data-Semantic-Web
@@ -108,7 +108,7 @@ ontologies is a specific discipline within Computer Science called
 [Ontology
 Engineering](https://doi.org/10.1007/978-0-387-39940-9_1315); however,
 the basics are easily grasped and while the reader may never have
-occation to create their own ontology, it is instructive to have an
+occasion to create their own ontology, it is instructive to have an
 understanding of the mechanics of ontology construction so that
 ontologies and logical inference that they allow may be used to their
 full potential.
@@ -147,7 +147,7 @@ what is of most interest as it shows the two kinds of things that OWL
 
 The `PopulationGroup` class is defined in a turtle file,
 [earlyIrishRelationships.ttl](https://github.com/cyocum/irish-gen/blob/master/earlyIrishRelationship.ttl).
-One of the more notible features of OWL is that it can be defined in
+One of the more notable features of OWL is that it can be defined in
 the same RDF structures that the data is itself encoded in.  To define
 `PopulationGroup` as an [OWL
 Class](https://www.w3.org/TR/2012/REC-owl2-primer-20121211/#Classes_and_Instances)
@@ -189,10 +189,10 @@ predicate.  What is meant by a literal is either a number like `42` or
 a string like `"h-Úi Buide"`.  For the avoidance of doubt, literals
 cannot be the subject of a triple.  In all cases, literals are defined
 in the [XML Schema
-Defintion](https://www.w3.org/TR/xmlschema11-2/#built-in-datatypes)
+Definition](https://www.w3.org/TR/xmlschema11-2/#built-in-datatypes)
 specification (hence, the `xsd` prefix).
 
-`rdfs:domain` and `rdfs:range` are slightly obscurely labled.
+`rdfs:domain` and `rdfs:range` are slightly obscurely labelled.
 `rdfs:domain` informs the system that the URL in the subject position
 use with the defined predicate is a member of the specified class.  In
 this case, the URL in the subject position should be marked as the
@@ -203,11 +203,11 @@ case, `xsd:string`.
 The effect of all the foregoing is that if a URL is used with a
 predicate, a Triplestore that implements OWL 2 will _infer_ that the
 URL belongs to a particular class without further intervention from a
-user.  Thus, using the turtle abbriveation `a` is often not necessary
+user.  Thus, using the turtle abbreviation `a` is often not necessary
 as the Triplestore will infer the type based on its use in the RDF.
 This kind of inference is often called _reasoning_ and a system that
 implements the logical system of OWL 2 is called a _reasoner`_.  There
-are several reasoners that are indepentent of a Triplestore and can be
+are several reasoners that are independent of a Triplestore and can be
 used without a storage system such as
 [Fact++](https://doi.org/10.1007/11814771_26),
 [HermiT](http://www.hermit-reasoner.com/), and Pellet (which happens
@@ -217,13 +217,13 @@ to be the reasoner used by Stardog).
 <#h-ÚiBuide> irishRel:populationGroupName "h-Úi Buide".
 ```
 
-Looking again at the above triple, the effect of the OWL 2 defintion
+Looking again at the above triple, the effect of the OWL 2 definition
 is that a Triplestore's reasoner will infer that `<#h-ÚiBuide>` is a
 `PopulationGroup` and infer that `"h-Úi Buide"` is a string.  A note
-of caution is appropirate at this point.  While a Triplestore with a
+of caution is appropriate at this point.  While a Triplestore with a
 reasoner will infer, it will _not_ enforce.  Thus, for instance if a
 user puts a number literal, like _42_, into the object position in the
-above triple, a reasoner will correcly ingest this and not inform the
+above triple, a reasoner will correctly ingest this and not inform the
 user.  Enforcement or validation of triples can be done using the
 [Shapes Constraint Language (SHACL)](https://www.w3.org/TR/shacl/)
 specification if the Triplestore supports it.  Additionally, if two
@@ -257,7 +257,7 @@ IrishGen heavily uses the Relationship ontology which defines
 `rel:ancestor` and `rel:descendantOf` are themselves defined as
 transitive and the inverse of each other.  Summing all of that up, it
 means that a reasoner can completely reconstruct a genealogical line
-without human intervention.  An instance of this will be illistrative.
+without human intervention.  An instance of this will be illustrative.
 Without needing to encode by hand Laidcnén has 2301 ancestors.
 
 This is incredibly powerful.  It means that only a minimum of
@@ -274,7 +274,7 @@ would be necessary to encode all the information not only directly
 stated but also logically implied by the genealogies.  That level of
 data extraction and encoding by team of humans who are experts in the
 medieval Irish genealogical tradition, even a large team assisted by
-specalized technology and automation, would be prohibitively
+specialised technology and automation, would be prohibitively
 expensive.  In essence, any assisting automation would by necessity
 reinvent Linked Data rather than just taking advantage of an already
 existing technology.
@@ -302,14 +302,14 @@ are created as are any other logical implications.  This means that
 all inferrencing is done at the time that the triple is added to the
 database.  The second is called _backwards-chaining_ which is
 implemented by Stardog.  In this strategy, the system uses a user
-query as a goal and works backards from that goal.  If the goal cannot
+query as a goal and works backwards from that goal.  If the goal cannot
 be logically inferred from the set of triples and the ontologies
 present in the Triplestore, nothing is returned.  Backwards-chaining
 is the inverse of forward-chaining.
 
-These two stratagies have a large effect on how a user will perceive a
+These two strategies have a large effect on how a user will perceive a
 system when querying it.  In the forward-chaining strategy, all
-inferrences are done at the time that the files are added to the
+inferences are done at the time that the files are added to the
 Triplestore.  This means that the repository on disk can be very large
 relative to the RDF files ingested.  For instance, at the time of
 writing, GraphDB's on disk representation of IrishGen, using
@@ -317,7 +317,7 @@ forward-chaining, is 2.1 GB compared to the 4.4 MB size of the RDF
 files.  On the other hand, querying this database is very fast as all
 inferences are computed before a query is run.  Additionally,
 ingesting the RDF files can take a long time as the system will need
-to work out all the inferrences, if any, for each triple.  In the
+to work out all the inferences, if any, for each triple.  In the
 backwards-chaining strategy, since the inferrencing is deferred until
 the time of the query, the on disk size is very small.  For instance
 in Stardog, the on disk representation of IrishGen is 81.3 MB.  The
@@ -338,14 +338,14 @@ take a very long time to complete.
 
 ## Conclusion
 
-The foregoing disucssion has introduced the reader to Triplestores, a
+The foregoing discussion has introduced the reader to Triplestores, a
 kind of graph database which is used to store and query RDF.  This led
-to a disucssion of OWL 2 logical inferrencing and topics that a user
+to a discussion of OWL 2 logical inferrencing and topics that a user
 who wants to write queries will need to know before attempting to use
 querying in Triplestores.  OWL 2 in conjunction with RDF gives a
 powerful set of tools with which to model the medieval Irish
 genealogical tradition.  The ability of OWL 2 to logically reason
-about the data to create new data subsantially expands and transforms
+about the data to create new data substantially expands and transforms
 that data in ways that a team of humans who are experts in the
 medieval Irish genealogies would not be able to do affordably.
 
