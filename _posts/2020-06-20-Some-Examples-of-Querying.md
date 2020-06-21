@@ -1,7 +1,7 @@
 ---
 layout: post
 date: 2020-06-20 18:00:00
-title: Basic Querying and more on the Cíannachta Glinne Geimen
+title: Some Examples of Querying and More on the Cíannachta Glinne Geimen
 author: et
 ---
 
