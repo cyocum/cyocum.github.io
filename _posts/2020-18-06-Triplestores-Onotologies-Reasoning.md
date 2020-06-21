@@ -18,11 +18,11 @@ post_url 2020-06-17-IrishGen-RDF-Linked-Data-Semantic-Web %}) will
 orient the reader before approaching this set of topics.  This guide
 is a theoretical examination of Triplestores and Ontologies.  If the
 reader is looking for a more practical introduction, Eystein
-Thanisch's ["Basic Querying and more on the Cíannachta Glinne
-Geimen"]({% post_url 2020-06-20-Basic-Querying %}) which gives the
-reader a motivated example of some of the more theoretical constructs
-discussed here.  A more detailed overview of those topics will be the
-focus of a forthcoming post.
+Thanisch's ["Some Examples of Querying and More on the Cíannachta
+Glinne Geimen"]({% post_url 2020-06-20-Some-Examples-of-Querying %})
+which gives the reader a motivated example of some of the more
+theoretical constructs discussed here.  A more detailed overview of
+those topics will be the focus of a forthcoming post.
 
 [IrishGen](https://github.com/cyocum/irish-gen) is, at its simplest, a
 static set of text files which conform to a certain format that is
@@ -32,7 +32,7 @@ in itself, one can use a text based string matching system like
 for relevant information, it is sub-optimal and better systems exist.
 [Tim Berners-Lee](https://orcid.org/0000-0003-1279-3709)'s original
 vision for the Semantic Web was a software agent that would crawl the
-web, then using the structured information retrieved, answer users
+web, then using the structured information retrieved, answer users'
 queries on the web (see ["Whatever Happened to the Semantic
 Web?"](https://twobithistory.org/2018/05/27/semantic-web.html)).  To
 be able to fulfil this vision, the software agent would need a storage
@@ -60,8 +60,6 @@ form while a Knowledge Graph is a theoretical construct which
 describes various means and methods of representing knowledge in a
 computer.  These terms are often used interchangeably and can cause
 confusion if a reader is unfamiliar with their use.
-
-[post]: {% post_url 2020-06-20-Basic-Querying.md%}
 
 ## Triplestores
 
@@ -296,9 +294,9 @@ good to discuss the different inferencing strategies that are
 implemented by Triplestores and their associated reasoners.  While
 this may seem like a very esoteric topic, it is critical to the
 experience of writing and running queries on Triplestores and will
-effect the perception of usefulness of Triplestores in general.
+effect the perception of the usefulness of Triplestores in general.
 
-There are two broad categories of inferrencing strategies (see
+There are two broad categories of inferencing strategies (see
 [Artificial Intelligence: A Modern
 Approach](http://www.worldcat.org/oclc/1021874142), pp. 208-385 for a
 discussion and for a mathematically complete description of both
@@ -309,9 +307,9 @@ first is called _forward-chaining_ which is implemented by GraphDB. In
 this strategy, when each assertion, in this case each triple, is added
 to the Triplestore, the ontologies loaded will be consulted and any
 triples that would be created by the logical rules set by the ontology
-are created as they are any other logical implications.  This means
-that all inferrencing is done at the time that the triple is added to
-the database.  The second is called _backwards-chaining_ which is
+are created as are any other logical implications.  This means that
+all inferrencing is done at the time that the triple is added to the
+database.  The second is called _backwards-chaining_ which is
 implemented by Stardog.  In this strategy, the system uses a user
 query as a goal and works backwards from that goal.  If the goal
 cannot be logically inferred from the set of triples and the
@@ -365,14 +363,16 @@ is looking for a project of this type.
 While powerful, there are downsides to inferencing of this type.
 First, the reasoner will make inferences without respect to the
 plausability of the data or the outcome.  Second, it will make
-inferences withou consideration for the weight of evidence.  If the
+inferences without consideration for the weight of evidence.  If the
 system detects a logical connection, it will assume that it is true as
-it assumes all assertions contained in the data are true.  Third,
-importantly for backwards-chaining systems, query response times can
-be frustrating.  Caution and a critical view of any data presented is
-always a good policy and no less so here.  While these are drawbacks
-as there are drawbacks to any system, it does not diminish the
-usefulness of the system for many users.
+it assumes all assertions contained in the data are true.  While this
+can be considered a flaw, it is useful for critical comparison of
+different historical sources.  Third, importantly for
+backwards-chaining systems, query response times can be frustrating.
+Caution and a critical view of any data presented is always a good
+policy and no less so here.  While these are drawbacks as there are
+drawbacks to any system, it does not diminish the usefulness of the
+system for many users.
 
 Finally, The ability of OWL 2 to logically reason about the data to
 create new data substantially expands and transforms that data in ways
