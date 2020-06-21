@@ -198,7 +198,7 @@ This post has presented three situations in which a simple query of IrishGen pro
       <th><b>Title in MS</b></th>
     </tr>
     <tr>
-      <th/><th colspan="2"><b>IrishGen FileName</b></th>
+      <th/><th colspan="2"><b>IrishGen File</b></th>
     </tr>
   </thead>
   <tbody>
@@ -208,14 +208,14 @@ This post has presented three situations in which a simple query of IrishGen pro
       <td><i><a href="http://www.ucc.ie/celt/published/G800011F/text023.html">Clanna Ébir i lLeith Chuind</a></i></td>
     </tr>
     <tr>
-      <td colspan="2">http://example.com/LL/clanna_ébir_i_l-leith_chuind.trig</td>
+      <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/LL/clanna_ébir_i_l-leith_chuind.trig</td>
     </tr>
     <tr>
       <td><b>R</b></td>
       <td><i><a href="https://celt.ucc.ie/published/G105003/text018.html">Clanna Ébeir H-I L-Leith Chuind</a></i></td>
     </tr>
     <tr>
-      <td colspan="2">http://example.com/Rawl_B502/clanna_ébeir_h_i_l_leith_chuind.trig</td>
+      <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/Rawl_B502/clanna_ébeir_h_i_l_leith_chuind.trig</td>
     </tr>
     <tr>
       <td rowspan="2">Text 2</td>
@@ -223,7 +223,7 @@ This post has presented three situations in which a simple query of IrishGen pro
       <td><i><a href="http://www.ucc.ie/celt/published/G105003/text006.html">Nunc Uí Diabulbaine</a></i></td>
     </tr>
     <tr>
-      <td colspan="2">http://example.com/Rawl_B502/nunc_úi_diabulbaine.trig</td>
+      <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/Rawl_B502/nunc_úi_diabulbaine.trig</td>
     </tr>
     <tr>
       <td rowspan="4">Text 3</td>
@@ -231,14 +231,14 @@ This post has presented three situations in which a simple query of IrishGen pro
       <td><i><a href="https://celt.ucc.ie//published/G800011F/text063.html">Genelach Dail Araide</a></i></td>
     </tr>
     <tr>
-      <td colspan="2">http://example.com/LL/dail_araide.trig</td>
+      <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/LL/dail_araide.trig</td>
     </tr>
     <tr>
     <td><b>L</b></td>
     <td><i><a href="http://www.ucc.ie/celt/published/G800011F/text058.html">Genelach Loegaire</a></i></td>
   </tr>
   <tr>
-    <td colspan="2">http://example.com/LL/loegaire.trig</td>
+    <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/LL/loegaire.trig</td>
   </tr>
   <tr>
   <td rowspan="4">Text 4</td>
@@ -246,14 +246,14 @@ This post has presented three situations in which a simple query of IrishGen pro
   <td><i><a href="http://www.ucc.ie/celt/published/G800011F/text049.html">Genelach Ciannacht Glinne Geimen</a></i></td>
   </tr>
   <tr>
-  <td colspan="2">http://example.com/LL/ciannachta_glinni_gaimen.trig</td>
+  <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/LL/ciannachta_glinni_gaimen.trig</td>
   </tr>
   <tr>
   <td><b>R</b></td>
   <td><i><a href="http://www.ucc.ie/celt/published/G105003/text014.html">Genelach Ciannachta Glinni Gaimen</a></i></td>
   </tr>
   <tr>
-  <td colspan="2">http://example.com/Rawl_B502/genelach_ciannachta_glinni_gaimen.trig</td>
+  <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/Rawl_B502/genelach_ciannachta_glinni_gaimen.trig</td>
   </tr>
   <tr>
   <td rowspan="6">Text 5</td>
@@ -261,21 +261,21 @@ This post has presented three situations in which a simple query of IrishGen pro
   <td><i><a href="http://www.ucc.ie/celt/published/G800011F/text033.html">Genelach Dáil Araide</a></i></td>
   </tr>
   <tr>
-  <td colspan="2">http://example.com/LL/dáil_araide.trig</td>
+  <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/LL/dáil_araide.trig</td>
   </tr>
   <tr>
   <td><b>R</b></td>
   <td><i><a href="http://www.ucc.ie/celt/published/G105003/text026.html">Genelach Úa N-Echach</a></i></td>
   </tr>
   <tr>
-  <td colspan="2">http://example.com/Rawl_B502/genelach_úa_n_echach.trig</td>
+  <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/Rawl_B502/genelach_úa_n_echach.trig</td>
   </tr>
   <tr>
   <td><b>Ld</b></td>
   <td><i><a href="https://celt.ucc.ie//published/G105005">Itim Síl Fergusa</a></i></td>
   </tr>
   <tr>
-  <td colspan="2">http://example.com/Laud_Misc_610/CGH/itim_síl_fergusa.trig</td>
+  <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/Laud_Misc_610/CGH/itim_síl_fergusa.trig</td>
   </tr>
   <tr>
     <td rowspan="2">Text 6</td>
@@ -283,7 +283,7 @@ This post has presented three situations in which a simple query of IrishGen pro
     <td><i><a href="http://www.ucc.ie/celt/published/G105003/text023.html">Clann Sáráin M Duibi</a></i></td>
   </tr>
   <tr>
-    <td colspan="2">http://example.com/Rawl_B502/clann_sáráin_m_duibi.trig</td>
+    <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/Rawl_B502/clann_sáráin_m_duibi.trig</td>
   </tr>
   <tr>
   <td rowspan="4">Text 7</td>
@@ -291,14 +291,14 @@ This post has presented three situations in which a simple query of IrishGen pro
   <td><i><a href="http://www.ucc.ie/celt/published/G800011F/text099.html">Rig Ailig</a></i></td>
   </tr>
   <tr>
-  <td colspan="2">http://example.com/LL/rig_ailig.trig</td>
+  <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/LL/rig_ailig.trig</td>
   </tr>
   <tr>
   <td><b>R</b></td>
   <td><i><a href="http://www.ucc.ie/celt/published/G105003/text014.html">Genelach Clainne Néill</a></i></td>
   </tr>
   <tr>
-  <td colspan="2">http://example.com/Rawl_B502/genelach_clainne_néill.trig</td>
+  <td colspan="2">https://github.com/cyocum/irish-gen/blob/master/Rawl_B502/genelach_clainne_néill.trig</td>
   </tr>
   </tbody>
 </table>
