@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2020-06-20 18:00:00 +010
+date: 2020-06-20 18:00:00
 title: Basic Querying and more on the Cíannachta Glinne Geimen
 author: et
 ---
@@ -13,7 +13,7 @@ ORCID: <a href="https://orcid.org/{{ author.orcid }}" title="{{author.name}}">{{
 ## Introduction
 In our [previous blogpost](https://cyocum.github.io/2020/06/06/Manuscript-Variants-and-the-Origins-of-C%C3%ADannachta-Glinne-Geimen.html), we looked at the variants between and within manuscript versions of the medieval Irish genealogies that we can encounter while working on IrishGen and how we go about encoding the information involved. This was in the context of the genealogies' account of the origins of the kingdom of the Cíannachta Glinne Geimen. In this post, we're going to continue following the history of this kingdom but, this time, consider some basic examples of how the IrishGen database can be queried.
 
-For introductory reading on the genealogies, we recommend Nollaig Ó Muraíle’s published lecture, _[The Irish Genealogies: Irish History’s Poor Relation?](https://www.ria.ie/its-occasional-lecture-vol-3-irish-genealogies-irish-historys-poor-relation)_, and Matthew Holmberg’s PhD thesis, ‘[Towards a Relative Chronology of the Milesian Genealogical Scheme](https://dash.harvard.edu/handle/1/37945002)’ (pp. 3–54). For an overview of IrishGen and our use of RDF, see the project [README](https://github.com/cyocum/irish-gen). All our data is available in our [GitHub repository](https://github.com/cyocum/irish-gen).
+For introductory reading on the genealogies, we recommend Nollaig Ó Muraíle’s published lecture, _[The Irish Genealogies: Irish History’s Poor Relation?](https://www.ria.ie/its-occasional-lecture-vol-3-irish-genealogies-irish-historys-poor-relation)_, and Matthew Holmberg’s PhD thesis, ‘[Towards a Relative Chronology of the Milesian Genealogical Scheme](https://dash.harvard.edu/handle/1/37945002)’ (pp. 3–54). For an overview of IrishGen and our use of RDF, see the project [README](https://github.com/cyocum/irish-gen); for more in-depth discussion, see Christopher Yocum's previous blogposts on [linked data](https://cyocum.github.io/2020/06/17/IrishGen-RDF-Linked-Data-Semantic-Web.html) and [digital datasets](https://cyocum.github.io/2020/06/07/Human-Curation-and-Digital-Datasets.html). All our data is available in our [GitHub repository](https://github.com/cyocum/irish-gen).
 
 ## Sources
 The [Book of Leinster](https://www.vanhamel.nl/codecs/Dublin,_Trinity_College,_MS_1339) (**L**) and [Rawl. B.502](https://www.vanhamel.nl/codecs/Oxford,_Bodleian_Library,_MS_Rawlinson_B_502) (**R**) continue to be our main manuscript sources, as these contain the only genealogical collections currently in the IrishGen database that include significant quantities of material on the Cíannachta. The third major genealogical collection in IrishGen, that from [Laud Misc. 610](https://www.vanhamel.nl/codecs/Oxford,_Bodleian_Library,_MS_Laud_Misc._610) (**Ld**), also makes an appearance.
@@ -21,7 +21,7 @@ The [Book of Leinster](https://www.vanhamel.nl/codecs/Dublin,_Trinity_College,_M
 A table of texts from the genealogies cited in this post is given at the end.
 
 ## The Sons of Findchán
-We have seen, notwithstanding isolated variants, that the genealogies (Text 1) hold that the first descendant of Tadg mac Céin to acquire territory in Glengiven was Findchán, son of Fíac, son of Findchad Ulach and that he had eight sons. We can check the statement that he had eight sons against the rest of the IrishGen database. This can be done using a visual explorer, such as that provided by *[GraphDB](https://www.ontotext.com/try-graphdb-se/)*, which was used to produce the visualizations in the last blogpost. It can also be done using a [SPARQL](https://www.w3.org/TR/rdf-sparql-query/) query:
+We have seen, notwithstanding isolated variants, that the genealogies (Text 1) hold that the first descendant of Tadg mac Céin to acquire territory in Glengiven was Findchán, son of Fíac, son of Findchad Ulach and that he had eight sons. We can check the statement that he had eight sons against the rest of the IrishGen database. This can be done using a visual explorer, such as that provided by *[GraphDB](https://www.ontotext.com/try-graphdb-se/)*, which was used to produce the visualizations in the last blogpost (for more on how this works, see Graph DB's [documentation](http://graphdb.ontotext.com/documentation/9.2/free/exploring-data.html)). It can also be done using a [SPARQL](https://www.w3.org/TR/rdf-sparql-query/) query:
 
 ```
 PREFIX rel: <http://purl.org/vocab/relationship/>
@@ -36,7 +36,7 @@ This returns not just every child of Findchán given in **[R §1347](https://cel
 
 25 URLs are returned:
 
-<img src="{{site.baseurl}}/assets/images/blogpost3_img#1.png" />
+<img src="{{site.baseurl}}/assets/images/blogpost3_img1.png"/>
 *Query executed with [GraphDB](https://www.ontotext.com/try-graphdb-se/)*
 
 These are mostly recognisable as mentions of the eight sons listed in Text 1. However, the query also reveals an item in **R** (Text 2), far removed within that manuscript from other sources for the Cíannachta Glinne Geimen, that mentions a ninth son of Findchán, Nóes.
@@ -71,7 +71,7 @@ What we can do is use IrishGen to contextualise Loiscibet in terms other than of
     rel:parentOf <#Coarthach>.
 ```
 
-She is described as a _bancháinte_ ("female satirist"), from _ben(http://www.dil.ie/5644)_ ("woman") and _[cáinte](http://www.dil.ie/7854)_ ("satirist"). Do any other satirists appear in IrishGen's database? We can find out:
+She is described as a _bancháinte_ ("female satirist"), from _[ben](http://www.dil.ie/5644)_ ("woman") and _[cáinte](http://www.dil.ie/7854)_ ("satirist"). Do any other satirists appear in IrishGen's database? We can find out:
 
 ```
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
@@ -87,7 +87,7 @@ This [SPARQL](https://www.w3.org/TR/rdf-sparql-query/) query looks for any URL w
 
 As it happens, IrishGen does contain another instance of a satirist:
 
-<img src="{{site.baseurl}}/assets/images/blogpost3_img#2.png" />
+<img src="{{site.baseurl}}/assets/images/blogpost3_img2.png"/>
 *Query executed with [GraphDB](https://www.ontotext.com/try-graphdb-se/)*
 
 Following the URL returned back to the file, we find:
@@ -111,7 +111,7 @@ This is [the pedigree of Dál nAraide](https://celt.ucc.ie//published/G800011F/t
 
 This passage is an origin legend and etymological narrative for the Ulster kin-group of Dál nAraide, whose kingdom was located to the east of that of Cíannachta Glinne Geimen, stretching from Mag nEilne, on the north coast between the [River Bush](https://www.logainm.ie/116127.aspx ) and the [River Bann](https://www.logainm.ie/1165494.aspx), down to [Lough Neagh](https://www.logainm.ie/1166400.aspx). They were a major power in Ulster in middle of the first millennium. Genealogically, according to this text, they are rooted in the north, descending from the Ulster Cycle hero, Conall Cernach. However, like the Cíannachta, their story is also linked via etymology in to that of Cormac mac Airt (= Cormac, grandson of Conn) and the legendary kingship of Ireland, which in turn connects them to far-off Munster. The compilation of genealogical collections as we have them was, after all, part of the developing national pseudo-history of Ireland, in which the idea of an island-wide kingship was key.
 
-Araide Bibre, our satirist, is the linchpin of the etymological, 'national' side of this narrative. The significance of him being a satirist is unclear. It does not mean that he was ignoble, however. Satire was the inverse of praise poetry in early Ireland but still took place in the context of elite politics, supposedly within a regulatory framework. For a detailed recent study, see Roisín McLoughlin's _[Early Irish Satire](http://www.worldcat.org/oclc/495267258)_. A satirist, whatever the term's modern connotations, would have been very much part of the establishment, even though illegitimate use of satire appears to have been a concern among jurists.
+Araide Bibre, our satirist, is the linchpin of the etymological, 'national' side of this narrative. The significance of him being a satirist is unclear. It does not mean that he was ignoble, however. Satire was the inverse of praise poetry in early Ireland but still took place in the context of elite politics, supposedly within a regulatory framework. For a detailed recent study, see Roisin McLaughlin's _[Early Irish Satire](http://www.worldcat.org/oclc/495267258)_. A satirist, whatever the term's modern connotations, would have been very much part of the establishment, even though illegitimate use of satire appears to have been a concern among jurists (see _[Early Irish Satire](http://www.worldcat.org/oclc/495267258)_, pp. 3-8).
 
 In Text 3, Araide Bibre, is clearly male. He is denoted with the masculine pronoun, _sé_, and he has a wife, Cairech. She is the one who actually fosters Fiacha. Elsewhere, however, Araide Bibre appears as a woman and as Fiacha's fostermother. '[A fhir thall tríallus in scél](https://archive.org/details/zeitschriftfrc13meyeuoft/page/2/mode/2up)', which consists almost entirely of questions relating to Irish legendary history, poses the following ([stanza 22](https://archive.org/details/zeitschriftfrc13meyeuoft/page/6/mode/2up), translation my own):
 
@@ -157,7 +157,7 @@ WHERE
 
 Had this query not returned satisfactory results, we might have considered searching nominative forms too. However, the results show that someone called Dúnlang, son of Scandal, appears once in three versions of the genealogies:
 
-<img src="{{site.baseurl}}/assets/images/blogpost3_img#3.png" />
+<img src="{{site.baseurl}}/assets/images/blogpost3_img3.png"/>
 *Query executed with [GraphDB](https://www.ontotext.com/try-graphdb-se/)*
 
 Navigating to the files and source texts involved, we find that Dúnlang appears in the genealogies of Dál nÁraide (Text 5) and is a descendant of Fiacha Araide, mentioned above. This was already implied in AU [681.1](https://celt.ucc.ie//published/T100001A/text251.html), where he is called _rex Cruithne_ ('king of the Cruithni'), Cruithni being the broader ethnic designation for the group of peoples among whom Dál nAraide had become the dominant kingdom.
@@ -180,13 +180,15 @@ WHERE
 
 This returns three results:
 
-<img src="{{site.baseurl}}/assets/images/blogpost3_img#4.png" />
+<img src="{{site.baseurl}}/assets/images/blogpost3_img4.png"/>
 *Query executed with [GraphDB](https://www.ontotext.com/try-graphdb-se/)*
 
-The first result turns out to be irrelevant, a consequence of the corners we cut when devising the query. It relates to 'Duin Dá Bárrc m. Fithrich' (Dún Dá Bárcc, son of Fithrech), of the obscure Clann Sárain meic Duibi (Text 6). The other two results, however, both relate to Mael Dúin, son of Mael Fithrich, who appears in a royal pedigree of Cenél nÉogáin, one of the northern branches of the Uí Néill. They were based in [Inishowen](https://www.logainm.ie/1166250.aspx), latterly expanding into modern-day [Co. Tyrone](https://www.logainm.ie/100030.aspx), to the west of Cíannachta Glinne Geimen. Cenél nÉogáin had been the junior partner to Cenél Conaill within the northern Úi Néill but Mael Dúin was one of a series of series of kings in the seventh and eighth century who increased Cenél nÉogáin's power through expansion of their influence eastwards. This confrontation with Cíannachta Glinne Geimen and Dál nAraide should be seen in this context. Mael Dúin did not prosper personally from the 'burning of the kings', however, as he was to die himself later in 681 (AU [681.2](https://celt.ucc.ie//published/T100001A/text251.html)) at the battle of Blai Sléibe. According to the _[Annals of Tigernach](https://www.vanhamel.nl/codecs/Annals_of_Tigernach)_, his opponents at that battle were the Cíannachta Glinne Geimen (AT [681.1](https://celt.ucc.ie//published/T100002A/text010.html)).
+The first result turns out to be irrelevant, a consequence of the corners we cut when devising the query. It relates to 'Duin Dá Bárrc m. Fithrich' (Dún Dá Bárcc, son of Fithrech), of the obscure Clann Sárain meic Duibi (Text 6). The other two results, however, both relate to Mael Dúin, son of Mael Fithrich, who appears in a royal pedigree of Cenél nÉogáin, one of the northern branches of the Uí Néill. They were based in [Inishowen](https://www.logainm.ie/1166250.aspx), latterly expanding into modern-day [Co. Tyrone](https://www.logainm.ie/100030.aspx), to the west of Cíannachta Glinne Geimen. Cenél nÉogáin had been the junior partner to Cenél Conaill within the northern Úi Néill but Mael Dúin was one of a series of series of kings in the seventh and eighth century who increased Cenél nÉogáin's power through expansion of their influence eastwards. This confrontation with Cíannachta Glinne Geimen and Dál nAraide should be seen in this context. Mael Dúin did not prosper personally from the 'burning of the kings', however, as he was to die himself later in 681 (AU [681.2](https://celt.ucc.ie//published/T100001A/text251.html)) at the battle of Blai Sléibe. According to the _[Annals of Tigernach](https://www.vanhamel.nl/codecs/Annals_of_Tigernach)_, his opponents at that battle were again the Cíannachta Glinne Geimen (AT [681.1](https://celt.ucc.ie//published/T100002A/text010.html)).
+
+## Concluding Thoughts
+This post has presented three situations in which a simple query of IrishGen provides valuable context when reading both genealogical and other types of source material. This is intended as a quick, practical showcase of IrishGen's usefulness as a database. Querying is complex, both in theory and in its myriad applications, and Christopher Yocum will be covering it in much more detail in future posts.
 
 ## Genealogical Texts Cited
-
 
 <table>
   <thead>
