@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2020-06-18
+date: 2020-06-22
 title: Triplestores, Ontologies, and Reasoning
 author: cgy
 ---
