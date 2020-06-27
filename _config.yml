@@ -22,8 +22,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   sources to Linked Data and other information retrieval systems.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://cyocum.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: cyocum
-github_username:  cyocum
+show_excerpts: true
 
 # Build settings
 markdown: kramdown

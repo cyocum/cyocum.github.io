@@ -3,6 +3,7 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
+list_title: Posts
 ---
 
 A place to communicate occasional topics concerning the [IrishGen
@@ -16,6 +17,4 @@ paper on your experience or on an aspect of the intersection between
 early Medieval Ireland and information storage and retrieval
 techniques, please contact the email address: <a
 href="mailto:cyocum@gmail.com">cyocum@gmail.com</a>.
-
-# Posts
 
