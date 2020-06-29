@@ -293,7 +293,7 @@ select ?x ?nominative ?genitive
 from <tag:stardog:api:context:all>
 where {
     ?x irishRel:nomName ?nominative.
-	optional { ?x irishRel:genName ?genitive }
+    optional { ?x irishRel:genName ?genitive }
     filter regex(?nominative, "^B[áa]eth$", "i")
 }
 ```
@@ -352,11 +352,11 @@ prefix irishRel: <http://example.com/earlyIrishRelationship.ttl#>
 select ?x ?y
 from <tag:stardog:api:context:all>
 where {
-	optional { 
-	  {?x irishRel:nomName ?y }
-	  union
-	  { ?x irishRel:genName ?y } 
-	}
+    optional { 
+      {?x irishRel:nomName ?y }
+      union
+      { ?x irishRel:genName ?y } 
+    }
     filter regex(?y, "^B[áa]eth$", "i")
 }
 ```
