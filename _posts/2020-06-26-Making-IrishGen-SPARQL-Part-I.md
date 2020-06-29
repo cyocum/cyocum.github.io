@@ -30,7 +30,7 @@ answering their own questions of the IrishGen dataset.
 
 In the Electronic Dictionary of the Irish Language (eDIL)
 [báeth](http://www.dil.ie/5139) is defined as "foolish, stupid, silly,
-thoughtless, reckless".  One would be suprised what one will find in
+thoughtless, reckless".  One would be surprised what one will find in
 the genealogies.  "Baeth" will serve as a guide to different kinds of
 queries that one can perform using SPARQL.
 
@@ -73,7 +73,7 @@ the Triplestore places in the query that will be filled by its search.
 
 The `from` keyword controls what graph to create a default graph from.
 In this instance, the `<tag:stardog:api:context:all>` is a Triplestore
-dependent, in this case Stardog, variable which combines all avaliable
+dependent, in this case Stardog, variable which combines all available
 graphs.  If, for instance, one only wanted to search for triples in
 the Book of Leinster then the `from` statement would be `from
 <http://example.com/LL>`.  This is a powerful way to constrain
@@ -92,7 +92,7 @@ user is interested in being returned from the query.  The
 matched.  Finally, "Baeth" is the string literal that the user is
 interested in matching.
 
-To rewrite the above into more plain langauge: "Return to me the list
+To rewrite the above into more plain language: "Return to me the list
 of all the subject URLs which have the predicate `irishRel:nomName`
 and the object string "Baeth"" or, even more informally, "I want all
 URLs where the person's nominative name is Baeth".
@@ -133,14 +133,14 @@ where {
 }
 ```
 
-This is a slight expantion of the above.  This query adds the `;`
+This is a slight expansion of the above.  This query adds the `;`
 which means "reuse the same subject" then gives the predicate
 `irishRel:genName` then the variable `?y` which will capture any
-genative forms of the name that may appear.  More informally, this can
+genitive forms of the name that may appear.  More informally, this can
 be translated: "Give me all subject URLs which have a nominative name
 "Baeth" also capture the genitive name and return it with the subject
 URL".  In this case, sadly, there are no instances of Baeth in the
-genative.
+genitive.
 
 To create a more interesting query, let us ask who are the children of
 idiots?  To do this a new concept will need to be introduced: the
@@ -155,7 +155,7 @@ genealogically important, RDF blank nodes are used to refer to these
 individuals.  In SPARQL terms, [blank
 nodes](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#QSynBlankNodes)
 are used as _variables_ which are not bound.  The usefulness of this
-will be showen in the query below:
+will be shown in the query below:
 
 ```sparql
 prefix irishRel: <http://example.com/earlyIrishRelationship.ttl#> 
@@ -196,7 +196,7 @@ specification](https://www.w3.org/TR/sparql11-query/#expressions),
 constraint".  Essentially, `filter` allow the user to constrain the
 kinds of results which are returned.  This can be very useful in a
 variety of situations.  In the question above, the query will need to
-be broadened but the user wants to restict the kinds of solution sets
+be broadened but the user wants to restrict the kinds of solution sets
 returned.  To wit:
 
 ```sparql
@@ -230,9 +230,9 @@ will also match `b` and so on.
 	
 There is an [extensive set of
 functions](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#SparqlOps)
-avaliable to build various filters and other things out of in SPARQL.
+available to build various filters and other things out of in SPARQL.
 It is another good use of time to look over the list of them to gain
-some familiarity with what is avaliable.
+some familiarity with what is available.
 
 To return to the children of idiots example.  To gain a full
 appreciation of the number of children, now that we have a method for
@@ -257,7 +257,7 @@ where {
 
 This query returns 22 results which is only one more than the original
 but with this we can see how to combine filters and that single
-invidual may be crucal to a researcher's interest so it is well worth
+individual may be crucial to a researcher's interest so it is well worth
 the extra complexity.
 
 One of the great benefits of RDF and LinkedData is its flexibility.
@@ -267,7 +267,7 @@ dummy value inserted and must be accounted for in SQL queries.  RDF
 does not have this restriction.  In the context of IrishGen, this
 means that not all individuals will have all predicates.  What this
 means is that a URL may or may not have any predicate.  When a user
-writes a query with a predicate, that prediate must exist for the
+writes a query with a predicate, that predicate must exist for the
 match to be made.  What if the user did not know in advance?  SPARQL
 has a solution for this through the
 [`optional`](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#optionals)
@@ -289,7 +289,7 @@ This query returns 19 results.  While in earlier queries, the results
 were deferred so that the reader was not overwhelmed or distracted by
 the table, it is instructive to reproduce the whole table here.
 
-| ?x                                                                             | ?nominative | ?genative |
+| ?x                                                                             | ?nominative | ?genitive |
 | http://example.com/LL/forthart_fea.trig#Baeth                                  | "Baeth"     |           |
 | http://example.com/LL/ciarraige.trig#Baeth                                     | "Baeth"     |           |
 | http://example.com/LL/genelach_h_mugroin_i_m-maig_liphi.trig#Baeth             | "Baeth"     |           |
@@ -315,7 +315,7 @@ return all results which have a nominative name.  This could result in
 the tens of thousands.  It will then filter those by the regular
 expression and that will spawn tens or hundreds of thousands of
 computations or more.  While in this case it took only 1816
-milllisecond (1.8 seconds) This is very inefficient.  Users will need
+millisecond (1.8 seconds), this is very inefficient.  Users will need
 to have some awareness of the complexity of their queries when running
 them and strive for the most specific query that will satisfy their
 requirements.  Some queries, however, will just take time and the user
@@ -325,7 +325,7 @@ instantaneous.
 The next natural question is: what happens when both names could be
 present?  As the reader can see from the example above the `optional`
 keyword needs `{` and `}` which implies that more than one thing can
-be optional at a time.  The general case can be respecified as: the
+be optional at a time.  The general case can be re-specified as: the
 subject can have either `irishRel:nomName` or `irishRel:genName` or
 both.  In this case SPARQL has the
 [`union`](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#alternatives)
@@ -349,7 +349,7 @@ where {
 ```
 
 The above query will return 24 results.  This will not distinguish
-between nominative or genative and will combine both if found.  Most
+between nominative or genitive and will combine both if found.  Most
 of the queries so far have not taken advantage of the reasoning
 capabilities that were discussed previously.  Thus there is an
 alternative way for this query to be written so that it will do a
@@ -388,10 +388,10 @@ where {
 ```
 
 The result of this query is also 24 as there are very few dative and
-accusitive cases encoded in the dataset.
+accusative cases encoded in the dataset.
 
 There is a final form of the `select` query that is useful to discuss
-before moving to `constuct` queries which is
+before moving to `construct` queries which is
 [aggregates](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#aggregates).
 These kinds of queries generally have to do with counting or adding
 which generally combines or aggregates information, hence the name.
@@ -418,7 +418,7 @@ them then counts the `max` of them.  It orders them _descending_
 (desc) and it [groups them
 by](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#groupby)
 `?x` which means that the query will break each group represented by
-the variable `?x` into a seperate group then work on that group.  In
+the variable `?x` into a separate group then work on that group.  In
 this case, it is `?x` so that each URL is counted as its own group no
 breaking is necessary.  The result is an order list going from most to
 least which shows each individual and their `:numChild` which is 1000
@@ -467,7 +467,7 @@ there is a discrepancy between LL and Rawl B502 that is now apparent
 by looking at this query.  Whatever the actual underlying cause, the
 query demonstrates something that would need to be done painstakingly
 by hand with an even larger margin for error than using a Triplestore
-to do the calcuation for the user.  Large aggregate questions about
+to do the calculation for the user.  Large aggregate questions about
 medieval Ireland can now be asked and answered with a greater degree
 of confidence.
 
@@ -491,7 +491,7 @@ limit 5
 As a reader familiar with the IrishGen dataset will know
 `rel:parentOf` is not enocoded very often within it.  The reasoner
 knows that `rel:parentOf` is the inverse of `rel:childOf` and thus can
-logically infer the number of chlidren by applying this logic to the
+logically infer the number of children by applying this logic to the
 dataset.  Thus, queries can be constructed that are not encoded within
 the dataset.  This does come at a cost that shifts the burden of
 working this out from human beings encoding it in the dataset to the
@@ -527,5 +527,5 @@ by the system.
 In the next post, the second most common form of SPARQL query will be
 explored: the `construct` query form which will introduce the reader
 to the real power of reasoning and how to extract sub-graphs from
-IrishGen and create visualizations which will help in their own
+IrishGen and create visualisations which will help in their own
 research.
