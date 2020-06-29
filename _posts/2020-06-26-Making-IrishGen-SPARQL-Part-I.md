@@ -471,16 +471,61 @@ to do the calcuation for the user.  Large aggregate questions about
 medieval Ireland can now be asked and answered with a greater degree
 of confidence.
 
+There is, of course, another method of counting by taking advantage of
+the reasoner:
+
+```sparql
+prefix irishRel: <http://example.com/earlyIrishRelationship.ttl#>
+prefix rel: <http://purl.org/vocab/relationship/>
+
+select ?x (count(distinct ?y) as ?numChildren)
+from <tag:stardog:api:context:all>
+where {
+    ?x rel:parentOf ?y
+}
+group by ?x
+order by desc(?numChildren)
+limit 5
+```
+
+As a reader familiar with the IrishGen dataset will know
+`rel:parentOf` is not enocoded very often within it.  The reasoner
+knows that `rel:parentOf` is the inverse of `rel:childOf` and thus can
+logically infer the number of chlidren by applying this logic to the
+dataset.  Thus, queries can be constructed that are not encoded within
+the dataset.  This does come at a cost that shifts the burden of
+working this out from human beings encoding it in the dataset to the
+computer but this is a much less labour intensive way of determining
+these things.  In this case, the query is runs for ~1022 milliseconds
+(about 1 second).  The outcome of this query for the top five people is:
+
+| ?x                                                                              | ?numChildren |
+| http://example.com/Laud_Misc_610/CGH/do_minigud_senchais_fer_muman.trig#Óengus  | 34           |
+| http://example.com/Laud_Misc_610/CGH/senchus_dáil_fíatach.trig#AilellaÁuluim    | 30           |
+| http://example.com/LL/laigsi.trig#CathairMár                                    | 29           |
+| http://example.com/Rawl_B502/úi_meic_h_eirc.trig#ConallClóen                    | 25           |
+| http://example.com/Rawl_B502/do_forslointib_ulad_iar_coitchiund_in_so.trig#Buan | 25           |
+
+While again outside the scope of the present post, it is interesting
+to note that Cathair Már has 29 calculated children while the
+genealogists have counted differently.  Again, there could be various
+reasons why this is and it would bear more investigation but the
+overall point is that there is now ways to do these kinds of queries
+which were not possible previously.
+
 ## Conclusion
 
-This post has covered some of the basic query types that a researcher
-will encounter when using SPARQL by using a useful idiot, Baeth, to
-explore each in turn.  There is, of course, much more to discover and
-it takes time and experience to use a Triplestore with SPARQL but a
-researcher should now feel confident that they have enough to get
-started asking their own questions of the IrishGen dataset.
+This post has covered some of the basic select query forms that a
+researcher will encounter when using SPARQL by using a useful idiot,
+Baeth, to explore each in turn.  There is, of course, much more to
+discover and it takes time, practice, experience to use a Triplestore
+with SPARQL but a researcher should now feel confident that they have
+enough to get started asking their own research questions of the
+IrishGen dataset and begin to explore the new possibilities afforded
+by the system.
 
 In the next post, the second most common form of SPARQL query will be
-explored: the `construct` query which will introduce the reader to the
-real power of reasoning and how to extract sub-graphs from IrishGen
-and create visualizations which will help in their own research.
+explored: the `construct` query form which will introduce the reader
+to the real power of reasoning and how to extract sub-graphs from
+IrishGen and create visualizations which will help in their own
+research.
