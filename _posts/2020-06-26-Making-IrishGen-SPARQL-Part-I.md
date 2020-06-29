@@ -11,15 +11,16 @@ author: cgy
 ORCID: <a href="https://orcid.org/{{ author.orcid }}" title="{{author.name}}">{{author.orcid}}</a>
 
 This post will begin to cover the [SPARQL query
-language](https://www.w3.org/TR/sparql11-overview/) as it works with
-IrishGen.  This is the culmination of several posts that guide the
-reader through the sometimes confusing world of Linked Data.  The post
-assumes that the reader is already familiar with [Linked Data,
-Semantic Web]({% post_url
+language](https://www.w3.org/TR/sparql11-overview/) using IrishGen as
+the example dataset.  This is the culmination of several posts that
+guide the reader through the sometimes confusing world of Linked Data.
+The post assumes that the reader is already familiar with [Linked
+Data, Semantic Web]({% post_url
 2020-06-17-IrishGen-RDF-Linked-Data-Semantic-Web %}), [Triplestores,
 and logical reasoning using OWL 2](% post_url
-2020-06-22-Triplestores-Onotologies-Reasoning %}).  Eystein Thanisch
-has already covered some of this in [his post]({% post_url
+2020-06-22-Triplestores-Onotologies-Reasoning %}).  [Eystein
+Thanisch](https://orcid.org/0000-0003-2819-5519) has already covered
+some of this in [his post]({% post_url
 2020-06-20-Some-Examples-of-Querying %}) which gives a practical and
 useful introduction to using SPARQL.  This and following posts is
 meant to deepen the reader's understanding and to give examples of
@@ -28,20 +29,24 @@ answering their own questions of the IrishGen dataset.
 
 ## Baeth: A Useful Idiot
 
-In the Electronic Dictionary of the Irish Language (eDIL)
-[báeth](http://www.dil.ie/5139) is defined as "foolish, stupid, silly,
-thoughtless, reckless".  One would be surprised what one will find in
-the genealogies.  "Baeth" will serve as a guide to different kinds of
-queries that one can perform using SPARQL.
+In the [Electronic Dictionary of the Irish
+Language](http://www.dil.ie) (eDIL) defines
+[báeth](http://www.dil.ie/5139) as "foolish, stupid, silly,
+thoughtless, reckless".  "Baeth" will serve as a guide and focus for
+many of the different kinds of queries that one can perform using
+SPARQL. 
 
-### SPARQL Query Forms: Select
+## SPARQL Query Forms: Select
 
 SPARQL has several different kinds of queries, also known as "[query
-forms](https://www.w3.org/TR/sparql11-query/#QueryForms)": select,
-construct, ask, and describe.  Select is the most common and will be
-the focus of this post.  Construct queries are the next most common
-but should have their own treatment so will be deferred to another
-post.
+forms](https://www.w3.org/TR/sparql11-query/#QueryForms)":
+[select](https://www.w3.org/TR/sparql11-query/#select),
+[construct](https://www.w3.org/TR/sparql11-query/#construct),
+[ask](https://www.w3.org/TR/sparql11-query/#ask), and
+[describe](https://www.w3.org/TR/sparql11-query/#describe).  Select is
+the most common and will be the focus of this post.  Construct queries
+are the next most common but should have their own treatment as they
+are more complex syntactically so will be deferred to another post.
 
 We will begin our journey with Baeth with a very simple query:
 
@@ -56,20 +61,25 @@ where {
 ```
 
 The first difference that a reader will notice between SPARQL and
-Turtle is that the `prefix` has no `@` in front of it and no `.` at
-the end.  This is the first of many minor differences between the two
-that should be noted.  The `prefix` works the same way as the `prefix`
-from the Turtle standard and serves to make long URLs short and
-readable.
+[TRiG](https://www.w3.org/TR/trig/) is that the `prefix` has no `@` at
+the beginning and no `.` at the end.  This is the first of many minor
+differences between the two that should be noted.  The `prefix` works
+the same way as the `prefix` from the TRiG standard and serves to make
+long URLs short and readable.
 
 The `select` keyword tells the Triplestore that what is to follow is a
-`select` form.  The `select` form's purpose is to return what is
+`select` query form.  The `select` form's purpose is to return what is
 formally termed a [_solution
 sequence_](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#defn_sparqlSolutionSequence)
 but for practical purposes can be understood as a list of terms which
 match the query.  The `?x` is the variable that the search is
 interested in producing and will be reused in the query to indicate to
 the Triplestore places in the query that will be filled by its search.
+One can think of the variable `?x` as a hole in the RDF which the
+computer is then asked to fill in.  There could be many different
+solutions to filling the hole so each is returned as a valid way of
+solving the problem of filling in the hole in the TRiG form presented
+by the user.
 
 The `from` keyword controls what graph to create a default graph from.
 In this instance, the `<tag:stardog:api:context:all>` is a Triplestore
@@ -79,8 +89,8 @@ the Book of Leinster then the `from` statement would be `from
 <http://example.com/LL>`.  This is a powerful way to constrain
 searches to particular MS or set of MSS and was one of the motivating
 factors in choosing TRiG with its graph declarations rather than
-sticking with Turtle which does not have the ability to create graphs
-in this way.
+continuing with [Turtle](https://www.w3.org/TR/turtle/) which does not
+have the ability to create graphs in this way.
 
 The `where` keyword introduces the main section of the query which is
 known as the _[basic graph
@@ -115,8 +125,11 @@ medieval Irish genealogies would question the overall usefulness as
 there are many different spelling variations and other details to
 consider.  Additionally, Stardog elides some of the information as it
 will only return one URLs if they are all marked `owl:sameAs`, which
-is an implementation detail which must be borne in mind by the user.
-Thus, Stardog will return all canonical URLs for Baeth but not all
+is an implementation detail which must be borne in mind by the user
+(see the [note
+attached](https://www.stardog.com/docs/#_same_as_reasoning) to the
+sameAs reasoning in the Stardog manual for more information).  Thus,
+Stardog will return all canonical URLs for Baeth but not all
 _instances_ of Baeth in the Triplestore.
 
 The next query will show how to have queries with multiple triples in
@@ -167,7 +180,7 @@ from <tag:stardog:api:context:all>
 where {
    ?x rel:childOf [
       a foaf:Person;
-	  irishRel:nomName "Baeth"
+      irishRel:nomName "Baeth"
    ]
 }
 ```
@@ -224,15 +237,15 @@ programming and query languages.  To quickly explain, regular
 expressions are a string matching pattern language.  In the above
 example, `^B[áa]eth$` can be translated into informal language as
 "tell me if `?y` matches the following pattern: at the beginning of
-`?y`, `B` followed by either `a` or `á` followed by `aeth` and then
-end of the string".  The option of case-insensitivity is on so `B`
+`?y`, `B` followed by either `a` or `á` followed by `eth` and then end
+of the string".  The option of case-insensitivity is active so `B`
 will also match `b` and so on.
 	
 There is an [extensive set of
 functions](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#SparqlOps)
-available to build various filters and other things out of in SPARQL.
-It is another good use of time to look over the list of them to gain
-some familiarity with what is available.
+available to build various filters and other constructs in SPARQL.  It
+is another good use of time to look over the list to gain some
+familiarity with what is available.
 
 To return to the children of idiots example.  To gain a full
 appreciation of the number of children, now that we have a method for
@@ -249,7 +262,7 @@ from <tag:stardog:api:context:all>
 where {
    ?x rel:childOf [
       a foaf:Person;
-	  irishRel:nomName ?y.
+      irishRel:nomName ?y.
    ]
    filter regex(?y, "^B[áa]eth$", "i")
 }
@@ -351,9 +364,10 @@ where {
 The above query will return 24 results.  This will not distinguish
 between nominative or genitive and will combine both if found.  Most
 of the queries so far have not taken advantage of the reasoning
-capabilities that were discussed previously.  Thus there is an
+capabilities that were [discussed previously]({% post_url
+2020-06-22-Triplestores-Onotologies-Reasoning %}).  Thus, there is an
 alternative way for this query to be written so that it will do a
-similar thing, that is search for names irrespective of their
+similar search, that is search for names irrespective of their
 grammatical case, but rely instead on reasoning rather than
 optionality.  If the reader consults the definition of `nomName`
 predicate in the
@@ -370,11 +384,12 @@ file, the reader will notice that:
     rdfs:subPropertyOf oldIrish:genitive, foaf:name .
 ```
 
-This means that the nominative name is a sub-class of `foaf:name`.  In
-other words, all `:nomName` are `foaf:name`.  Further, `:genName` is
-similarly defined.  Taken as a whole, this means that, in the presence
-of a Triplestore with a sufficiently powerful reasoner, `foaf:name`
-can take the place of the other combination of names.  Thus:
+This means that the nominative name is a sub-property of `foaf:name`.
+In other words, all `:nomName` are `foaf:name`.  Further, `:genName`
+is similarly defined.  Taken as a whole, this means that, in the
+presence of a Triplestore with a sufficiently powerful reasoner,
+`foaf:name` can take the place of the other combination of names.
+Thus:
 
 ```sparql
 prefix foaf:  <http://xmlns.com/foaf/0.1/>
@@ -382,7 +397,7 @@ prefix foaf:  <http://xmlns.com/foaf/0.1/>
 select ?x ?y
 from <tag:stardog:api:context:all>
 where {
-	?x foaf:name ?y
+    ?x foaf:name ?y
     filter regex(?y, "^B[áa]eth$", "i")
 }
 ```
@@ -391,15 +406,14 @@ The result of this query is also 24 as there are very few dative and
 accusative cases encoded in the dataset.
 
 There is a final form of the `select` query that is useful to discuss
-before moving to `construct` queries which is
+before moving to `construct` queries is
 [aggregates](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#aggregates).
-These kinds of queries generally have to do with counting or adding
-which generally combines or aggregates information, hence the name.
-We will need to part ways for a moment from our useful idiot, Baeth.
-There is encoded in the dataset the `:numChild` predicate.  In the
-genealogies, the number of children a person had would occasionally be
-recorded.  Thus we can ask the question who had the most recorded
-children in the genealogies:
+These kinds of queries generally count or add or generally combines or
+aggregates information, hence the name.  We will need to part ways for
+a moment from our useful idiot, Baeth.  There is encoded in the
+dataset the `:numChild` predicate.  In the genealogies, the number of
+children a person had would occasionally be recorded.  Thus we can ask
+the question who had the most recorded children in the genealogies:
 
 ```sparql
 prefix irishRel: <http://example.com/earlyIrishRelationship.ttl#> 
@@ -414,23 +428,25 @@ order by desc (?maxNumChild)
 ```
 
 This query takes all URLs that have a `irishRel:numChild` declared on
-them then counts the `max` of them.  It orders them _descending_
-(desc) and it [groups them
+them then counts the `max` of them for each individual.  This means
+that it will find the largest `irishGen:numChild` that an individual
+has declared on them.  It orders them _descending_ (desc) and it
+[groups them
 by](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#groupby)
 `?x` which means that the query will break each group represented by
 the variable `?x` into a separate group then work on that group.  In
-this case, it is `?x` so that each URL is counted as its own group no
-breaking is necessary.  The result is an order list going from most to
-least which shows each individual and their `:numChild` which is 1000
-results.  Thankfully, this is a very fast query at 68 milliseconds.
+this case, it is `?x` so that each URL is counted as its own group.
+The result is an order list going from most to least which shows each
+individual and their `:numChild` which is more than 1000 results.
+Thankfully, this is a very fast query at 68 milliseconds.
 Benchmarking software is a exhaustingly large subject so there is a
 very high variance in what the user may experience on their own
-machines due to _inter alia_ CPU L1 and L2 cache strategies, RAM clock
-rate, disk speed, query optimiser, and even more complicated events
-outside the control of the Triplestore.
+computers due to _inter alia_ CPU L1 and L2 cache strategies, RAM
+clock rate, disk speed, query optimiser, and even more complicated
+events outside the control of the Triplestore.
 
-As the result is 1000, we will only concern ourselves with the top
-five. We can do that progrmmatically by using the `limit` keyword.
+As the result is over 1000, we will only concern ourselves with the
+top five. We can do that progrmmatically by using the `limit` keyword.
 
 ```sparql
 prefix irishRel: <http://example.com/earlyIrishRelationship.ttl#> 
@@ -439,7 +455,6 @@ select ?x (max(?numChild) as ?maxNumChild)
 from <tag:stardog:api:context:all>
 where {
     ?x irishRel:numChild ?numChild
-
 } 
 group by ?x
 order by desc (?maxNumChild)
@@ -457,19 +472,21 @@ limit 5
 The results of this raise an interesting point.  The reader will
 notice that Cathair Már appears three times in the results.  This
 means that there are _three_ different declared number of children for
-Cathair Már.  To investigate this is outside the scope of this post
-but a few hypothesises suggest themselves.  First, that Cathair Már
-has differing numbers and the genealogists were themselves confused
-while taking from their own sources or constructing genealogies with
-competing interests.  Second, these are all the same person but they
-have not been linked together by `owl:sameAs` by the curators.  Third,
-there is a discrepancy between LL and Rawl B502 that is now apparent
-by looking at this query.  Whatever the actual underlying cause, the
-query demonstrates something that would need to be done painstakingly
-by hand with an even larger margin for error than using a Triplestore
-to do the calculation for the user.  Large aggregate questions about
-medieval Ireland can now be asked and answered with a greater degree
-of confidence.
+Cathair Már and they are not counted the same as `max` should return
+only the largest for a single individual.  To investigate this is
+outside the scope of this post but a few hypothesises suggest
+themselves.  First, that Cathair Már has differing numbers and the
+genealogists were themselves confused while taking from their own
+sources or constructing genealogies with competing interests.  Second,
+these are all the same person but they have not been linked together
+by `owl:sameAs` by the curators which would then match what is
+expected.  Third, there is a discrepancy between LL and Rawl B502 that
+is now apparent by looking at this query.  Whatever the actual
+underlying cause, the query demonstrates something that would need to
+be done painstakingly by hand with an even larger margin for error
+than using a Triplestore to do the calculation for the user.  Large
+aggregate questions about medieval Ireland can now be asked and
+answered with a greater degree of confidence.
 
 There is, of course, another method of counting by taking advantage of
 the reasoner:
@@ -489,15 +506,16 @@ limit 5
 ```
 
 As a reader familiar with the IrishGen dataset will know
-`rel:parentOf` is not enocoded very often within it.  The reasoner
-knows that `rel:parentOf` is the inverse of `rel:childOf` and thus can
-logically infer the number of children by applying this logic to the
-dataset.  Thus, queries can be constructed that are not encoded within
-the dataset.  This does come at a cost that shifts the burden of
-working this out from human beings encoding it in the dataset to the
-computer but this is a much less labour intensive way of determining
-these things.  In this case, the query is runs for ~1022 milliseconds
-(about 1 second).  The outcome of this query for the top five people is:
+`rel:parentOf` is not encoded very often within the dataset.  The
+reasoner knows that `rel:parentOf` is the inverse of `rel:childOf` and
+thus can logically infer the number of children by applying this logic
+to the dataset.  Thus, queries can be constructed that are not encoded
+within the dataset.  This does come at a cost that shifts the burden
+of calculating this from human beings encoding it in the dataset to
+the computer but this is a much less labour intensive way of
+determining these things.  In this case, the query is runs for ~1022
+milliseconds (about 1 second).  The outcome of this query for the top
+five people is:
 
 | ?x                                                                              | ?numChildren |
 | http://example.com/Laud_Misc_610/CGH/do_minigud_senchais_fer_muman.trig#Óengus  | 34           |
@@ -518,11 +536,11 @@ which were not possible previously.
 This post has covered some of the basic select query forms that a
 researcher will encounter when using SPARQL by using a useful idiot,
 Baeth, to explore each in turn.  There is, of course, much more to
-discover and it takes time, practice, experience to use a Triplestore
-with SPARQL but a researcher should now feel confident that they have
-enough to get started asking their own research questions of the
-IrishGen dataset and begin to explore the new possibilities afforded
-by the system.
+discover and it takes time, practice, experimentation, and experience
+to use a Triplestore with SPARQL.  However, a researcher should now
+feel confident that they have enough to get started asking their own
+research questions of the IrishGen dataset and begin to explore the
+new possibilities afforded by the system.
 
 In the next post, the second most common form of SPARQL query will be
 explored: the `construct` query form which will introduce the reader
