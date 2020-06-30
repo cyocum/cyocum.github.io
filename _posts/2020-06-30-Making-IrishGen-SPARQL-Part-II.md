@@ -12,7 +12,7 @@ ORCID: <a href="https://orcid.org/{{ author.orcid }}" title="{{author.name}}">{{
 
 The first post in this series covered the `select` query form and used
 Baeth as a guide.  We will continue our sojourn through SPARQL with
-Baeth in this next installment where the `construct` query form will
+Baeth in this next instalment where the `construct` query form will
 be introduced and discussed.
 
 Simply but opaquely stated, the `construct` query form takes one
@@ -74,17 +74,17 @@ clause constructs.  The effect of this is to excise the graph of all
 of Baeth's children from the entire graph of all of IrishGen.  This
 makes it possible to visualise.  It is no use to attempt to visualise
 the entire graph as a user would most likely get lost or confused.
-Extracting and visualizing sub-graphs allows the user to target
+Extracting and visualising sub-graphs allows the user to target
 persons of interest and their genealogical information without
 becoming overloaded by extraneous information.  Additionally,
-attempting to render visualizations of vast graphs is a huge
+attempting to render visualisations of vast graphs is a huge
 computational task and most user's machines would not be powerful
 enough to do it.
 
 As an aside, the above query can be written more concisely by using
 the single body form of `construct`, which can be useful when the user
 wishes to have a small subset extracted from the graph then used in
-visualization:
+visualisation:
 
 ```sparql
 prefix rel: <http://purl.org/vocab/relationship/>
@@ -96,7 +96,7 @@ where {
 }
 ```
 
-The visualization that is returned by Stardog Studio is below.
+The visualisation that is returned by Stardog Studio is below.
 
 <img src="{{site.baseurl}}/assets/images/construct_baeth_1.png" />
 
@@ -123,7 +123,7 @@ as one can see below:
 <img src="{{site.baseurl}}/assets/images/construct_baeth_2.png" />
 
 A much more ambitious graph to construct is the graph of Baeth's
-ancestors or to reconstruct his geneaological line from the
+ancestors or to reconstruct his genealogical line from the
 Triplestore.  This query introduces a few new constructs which are
 handy when working with SPARQL.
 
@@ -155,24 +155,24 @@ parent of Baeth as well".  These are then reconstructed in the
 `construct` form to create the reconstructed genealogy of Baeth.  The
 `union` is used to get Baeth themselves attached to the output through
 their parent which makes it slightly easier to interpret the
-visualization.
+visualisation.
 
 <img src="{{site.baseurl}}/assets/images/construct_baeth_3.png" />
 
-One will note that the geneaology only goes back to Imchada.  This is
+One will note that the genealogy only goes back to Imchada.  This is
 due to the fact that Imchada is not linked to any other part of the
 genealogies.  The reason for this is outside the scope of this post
 but could be as simple as a missing `owl:sameAs` link from elsewhere.
 The curators tend to be conservative and if there is no clear evidence
 that two individuals are the same, the policy is to leave them as is.
 Finally, a note about performance.  This query took 21000 milliseconds
-or about 21 seconds to run.  Reconstucting this by hand would take
-much longer and creating a visualization even longer still.  Resulting
-in an interactive visualization is just one more additional benefit.
+or about 21 seconds to run.  Reconstructing this by hand would take
+much longer and creating a visualisation even longer still.  Resulting
+in an interactive visualisation is just one more additional benefit.
 
 As we can see, `construct` queries allow the transformation of RDF
-graphs found in the Triplstore into other RDF graphs.  Using this, we
+graphs found in the Triplestore into other RDF graphs.  Using this, we
 can extract interesting sub-graphs from the dataset and visualize them
-using Stardog Studio.  This allows the reconstruction of geneaological
+using Stardog Studio.  This allows the reconstruction of genealogical
 lines and visual exploration of the data that is latent in the dataset
 through a Triplestore's reasoning capabilities.
