@@ -17,15 +17,15 @@ guide the reader through the sometimes confusing world of Linked Data.
 The post assumes that the reader is already familiar with [Linked
 Data, Semantic Web]({% post_url
 2020-06-17-IrishGen-RDF-Linked-Data-Semantic-Web %}), [Triplestores,
-and logical reasoning using OWL 2](% post_url
-2020-06-22-Triplestores-Onotologies-Reasoning %}).  [Eystein
+and logical reasoning using OWL 2]({% post_url
+2020-06-22-Triplestores-Onotologies-Reasoning%}).  [Eystein
 Thanisch](https://orcid.org/0000-0003-2819-5519) has already covered
 some of this in [his post]({% post_url
 2020-06-20-Some-Examples-of-Querying %}) which gives a practical and
-useful introduction to using SPARQL.  This and following posts is
-meant to deepen the reader's understanding and to give examples of
-most forms of SPARQL so that the reader feels confident in asking and
-answering their own questions of the IrishGen dataset.
+useful introduction to using SPARQL with IrishGen.  This and following
+posts is meant to deepen the reader's understanding and to give
+examples of most forms of SPARQL so that the reader feels confident in
+asking and answering their own questions of the IrishGen dataset.
 
 ## Báeth: A Useful Guide 
 
@@ -169,8 +169,16 @@ which means "reuse the same subject" then gives the predicate
 genitive forms of the name that may appear.  More informally, this can
 be translated: "Give me all subject URLs which have a nominative name
 "Báeth" and also capture the genitive name and return it with the
-subject URL".  In this case, sadly, there are no instances of Báeth in
-the genitive.
+subject URL".  One detail will need to be noted here but the query
+will only match where there is an extact match of "Baeth" in the
+nominative and the URL has a genative name.  Three results are
+returned:
+
+| ?x                                                                     | ?y      |
+| http://example.com/LL/forthart_fea.trig#Baeth                          | "Baeth" |
+| http://example.com/LL/genelach_h_n-enechglais.trig#Baeth-fdda055e      | "Baeth" |
+| http://example.com/LL/de_genelach_dail_messi_corbb.trig#Baeth-a245b020 | "Báeth" |
+| http://example.com/LL/genelach_h_n-enechglais.trig#Baeth-50d79733      | "Baeth" |
 
 To create a more interesting query, let us ask who are the children of
 idiots?  To do this a new concept will need to be introduced: the
@@ -332,19 +340,19 @@ were deferred so that the reader was not overwhelmed or distracted by
 the table, it is instructive to reproduce the whole table here.
 
 | ?x                                                                             | ?nominative | ?genitive |
-| http://example.com/LL/forthart_fea.trig#Baeth                                  | "Baeth"     |           |
+| http://example.com/LL/forthart_fea.trig#Baeth                                  | "Baeth"     | "Baeth"   |
 | http://example.com/LL/ciarraige.trig#Baeth                                     | "Baeth"     |           |
 | http://example.com/LL/genelach_h_mugroin_i_m-maig_liphi.trig#Baeth             | "Baeth"     |           |
 | http://example.com/Rawl_B502/mínugud_senchusa_laigin_and_so_sís.trig#Báeth     | "Baeth"     |           |
-| http://example.com/LL/genelach_h_n-enechglais.trig#Baeth-fdda055e              | "Baeth"     |           |
-| http://example.com/LL/genelach_h_n-enechglais.trig#Baeth-fdda055e              | "Báeth"     |           |
+| http://example.com/LL/genelach_h_n-enechglais.trig#Baeth-fdda055e              | "Baeth"     | "Baeth"   |
+| http://example.com/LL/genelach_h_n-enechglais.trig#Baeth-fdda055e              | "Báeth"     | "Baeth"   |
 | http://example.com/LL/eoganachta_casil.trig#Buith                              | "Baeth"     |           |
 | http://example.com/Rawl_B502/genelach_corco_m_druad.trig#Báeth                 | "Báeth"     |           |
 | http://example.com/Rawl_B502/genelach_ceníuil_bóguine.trig#Báeth               | "Báeth"     |           |
 | http://example.com/Rawl_B502/do_primforslointib_Lagen_inso.trig#Báeth-604282d0 | "Báeth"     | "Báeth"   |
 | http://example.com/LL/de_genelach_dail_messi_corbb.trig#Baeth-a245b020         | "Baeth"     | "Báeth"   |
 | http://example.com/LL/de_genelach_dail_messi_corbb.trig#Baeth-a245b020         | "Báeth"     | "Báeth"   |
-| http://example.com/LL/genelach_h_n-enechglais.trig#Baeth-50d79733              | "Baeth"     |           |
+| http://example.com/LL/genelach_h_n-enechglais.trig#Baeth-50d79733              | "Baeth"     | "Baeth"   |
 | http://example.com/LL/genelach_h_falgi.trig#Báeth                              | "Báeth"     |           |
 | http://example.com/Rawl_B502/genelach_benntraige.trig#Báeth                    | "Báeth"     | "Báeth"   |
 | http://example.com/Rawl_B502/clann_aingeda.trig#Báeth                          | "Báeth"     | "Báeth"   |
