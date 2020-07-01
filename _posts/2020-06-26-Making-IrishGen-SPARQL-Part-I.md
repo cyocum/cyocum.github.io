@@ -181,7 +181,7 @@ returned:
 | http://example.com/LL/genelach_h_n-enechglais.trig#Baeth-50d79733      | "Baeth" |
 
 To create a more interesting query, let us ask who are the children of
-idiots?  To do this a new concept will need to be introduced: the
+Báeth?  To do this a new concept will need to be introduced: the
 [blank
 node](https://www.w3.org/TR/rdf11-concepts/#section-blank-nodes).
 Blank nodes are URLs which have no subject or in terms of IrishGen,
@@ -447,7 +447,7 @@ before moving to `construct` queries is
 [aggregates](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#aggregates).
 This kind of query generally count or add or generally combines or
 aggregates information, hence the name.  We will need to part ways for
-a moment from our useful idiot, Báeth.  There is encoded in the
+a moment from our useful guide, Báeth.  There is encoded in the
 dataset the `:numChild` predicate.  In the medieval texts of the
 genealogies, the number of children a person had would occasionally be
 recorded.  Thus we can ask who had the most recorded children in the
