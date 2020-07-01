@@ -133,12 +133,12 @@ The results of the query using the current IrishGen are:
 
 A note about reasoning will be helpful here.  The reasoning
 capabilities of Stardog, due to its backwards chaining strategy, can
-be turned on or off at the time the query is sent to Stardog for
+be enabled or disabled at the time the query is sent to Stardog for
 processing.  If it is turned off, the query will return only results
 from the dataset as it stands in the files that are loaded into it.
-GraphDB on the other hand has reasoning always on because it must
+GraphDB on the other hand has reasoning always enabled because it must
 always pre-compute the entire graph before the query can be
-processed. From this point onwards, unless otherwise stated, assume
+processed. From this point onward, unless otherwise stated, assume
 that Stardog is used and reasoning is enabled.
 
 While this may be useful, someone knowledgeable concerning the
