@@ -133,7 +133,9 @@ prefix rel: <http://purl.org/vocab/relationship/>
 construct {
     ?s rel:childOf ?parent.
     ?y rel:parentOf ?baeth.
-} where {
+} 
+from <tag:stardog:api:context:all>
+where {
     values ?baeth {<http://example.com/Rawl_B502/clann_aingeda.trig#Báeth> }
 
     {
