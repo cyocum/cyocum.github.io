@@ -26,8 +26,9 @@ useful parts of the overall dataset such as Báeth's children or, even
 more interestingly, Báeth's genealogy as reconstructed by the
 reasoner.
 
-We will start by examining Báeth's children.  In this, we will need to
-choose a particular Báeth.  Using the query below:
+We will start by examining Báeth's children so that we can show their
+relationship to Baeth.  In this, we will need to choose a particular
+Báeth.  Using the query below:
 
 ```sparql 
 prefix foaf:  <http://xmlns.com/foaf/0.1/>
@@ -83,28 +84,29 @@ where {
 ```
 
 `construct` queries generally have have two bodies.  After the
-`construct` keyword which is the target RDF the user wishes to create
-comes the patter that the user wishes to produce. The `from` keyword
-here serves a similar purpose as it does in the `select` query form
-and denotes that the user is interested in pulling the entire graph
-into the default graph or more simply, that the entire dataset should
-be considered when running the query.  The `where` keyword denotes the
-pattern that the Triplestore should match.  In this case, the pattern
-is the same as the RDF that the `construct` clause constructs.  The
-effect of this is to excise the graph of all of Báeth's children from
-the entire graph of all of IrishGen.  This makes it possible to
-visualise.  It is no use to attempt to visualise the entire graph as a
-user would most likely get lost or confused.  Extracting and
-visualising sub-graphs allows the user to target persons of interest
-and their genealogical information without becoming overloaded by
-extraneous information.  Additionally, attempting to render
-visualisations of vast graphs is a huge computational task and most
-user's machines would not be powerful enough to do it.
+`construct` keyword which is the target RDF the user wishes to
+create. The `from` keyword here serves a similar purpose as it does in
+the `select` query form and denotes that the user is interested in
+having the Triplestore consider the entire dataset when running the
+query.  The `where` keyword denotes the pattern that the Triplestore
+should match.  In this case, the pattern is the same as the RDF that
+the `construct` clause constructs.  The effect of this is to extract
+the sub-graph of all of Báeth's children from the entire graph of all
+of IrishGen.  This makes it possible to visualise.  It is no use to
+attempt to visualise the entire graph as a user would most likely get
+lost or confused.  Extracting and visualising sub-graphs allows the
+user to target persons of interest and their genealogical information
+without becoming overloaded by extraneous information.  Additionally,
+attempting to render visualisations of vast graphs is a huge
+computational task and most user's machines would not be powerful
+enough to accomplish it.
 
 As an aside, the above query can be written more concisely by using
 the single body form of `construct`, which can be useful when the user
 wishes to have a small subset extracted from the graph then used in
-visualisation:
+visualisation.  The single body form of `construct` can only be used
+with the constructed graph pattern exactly matches the pattern used in
+the `where` clause:
 
 ```sparql
 prefix rel: <http://purl.org/vocab/relationship/>
@@ -121,30 +123,71 @@ The visualisation that is returned by Stardog Studio is below.
 <img src="{{site.baseurl}}/assets/images/construct_baeth_1.png" />
 
 As one can see, this produces a star-like structure of children around
-Báeth.  At this point one can start exploring the graph by
-right-clicking on the nodes and choosing "Expand from node".  However,
-in Stardog Studio there is a problem where unless the "Query All
-Graphs" property is set to true in Stardog, it will not expand.
-Briefly, GraphDB has "Query All Graphs" essentially on by default and
-is not a property that the user can set.  Stardog has the property off
-by default which can cause confusion when a user is encountering both
-Triplestores.  A second and more pressing problem is that expanding
-nodes in the face of reasoning can cause a query that a user's laptop
-cannot finish in a reasonable time or finish at all in the face of the
-query timeout restrictions.  In Stardog, this can be overcome by
-turning reasoning off when doing an exploration of the graph if the
-query does not return in a reasonable time but this limits what is
-possible.  It is the user's discretion to understand what their query
-involves and what compromises they are willing to tolerate.
+Báeth.  At this point one can start exploring the wider graph by
+right-clicking on the nodes and choosing "Expand from node", which
+will pull from the entire graph (the construct query being just a
+starting point).  However, in Stardog Studio there is a problem where
+unless the "Query All Graphs" property is set to true in Stardog, it
+will not expand.  Briefly, GraphDB has "Query All Graphs" essentially
+on by default and is not a property that the user can set.  Stardog
+has the property off by default which can cause confusion when a user
+is encountering both Triplestores.  A second and more pressing problem
+is that expanding nodes in the face of reasoning can cause a query
+that a user's laptop cannot finish in a reasonable time or finish at
+all in the face of the query timeout restrictions.  In Stardog, this
+can be overcome by turning reasoning off when doing an exploration of
+the graph if the query does not return in a reasonable time but this
+limits what is possible.  It is up to the user's discretion to
+understand what their query involves and what compromises they are
+willing to tolerate.
 
-With reasoning turned off, one can explore the graph a bit at a time
-as one can see below:
+To set the Stardog parameter "Query All Graphs" to true in Stardog
+Studio.  The user will need to go to "Databases" then select their
+database from the list of databases.  In the right hand pane, the user
+will need to choose "Properties".  In the search box directly below
+the "Properties" header, type "query all".  This will cause the option
+to appear and the user can then check the checkbox to enable "Query
+All Graphs".
+
+To contrast this with a `select` query that returns the same
+information but in a textual format, the query below recreates the
+`construct` query.
+
+```sparql
+prefix rel: <http://purl.org/vocab/relationship/>
+
+select ?child
+from <tag:stardog:api:context:all>
+where {
+    <http://example.com/Rawl_B502/clann_aingeda.trig#Báeth> rel:parentOf ?child
+}
+```
+
+with the result being:
+
+| child                                                    |
+| http://example.com/Rawl_B502/úib_luchta.trig#Comdellach  |
+| http://example.com/Rawl_B502/úib_luchta.trig#Fogartach   |
+| http://example.com/Rawl_B502/úib_luchta.trig#Díummassach |
+| http://example.com/Rawl_B502/úib_luchta.trig#Flann       |
+| http://example.com/Rawl_B502/úib_luchta.trig#Flanngus    |
+| http://example.com/Rawl_B502/úib_luchta.trig#Lassirne    |
+| http://example.com/Rawl_B502/clann_eichlich.trig#Nárgusa |
+| http://example.com/Rawl_B502/úib_luchta.trig#Aingid      |
+| http://example.com/Rawl_B502/úib_luchta.trig#Eichlech    |
+| http://example.com/Rawl_B502/úib_luchta.trig#Airechtach  |
+| http://example.com/Rawl_B502/úib_luchta.trig#Dóelgus     |
+| http://example.com/Rawl_B502/úib_luchta.trig#Abiél       |
+
+Continuing with the graph visualsation created above, one can explore
+the graph a bit at a time as one can see below, with reasoning turned
+off to ensure that the query can finish:
 
 <img src="{{site.baseurl}}/assets/images/construct_baeth_2.png" />
 
 A much more ambitious graph to construct is the graph of Báeth's
 ancestors or to reconstruct his genealogical line from the
-Triplestore.  This query introduces a few new constructs which are
+database.  This query introduces a few new constructs which are
 handy when working with SPARQL.
 
 ```sparql
