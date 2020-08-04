@@ -12,9 +12,9 @@ ORCID: <a href="https://orcid.org/{{ author.orcid }}" title="{{author.name}}">{{
 
 The first post in this series covered the `select` query form and used
 individuals with the name Báeth as a guide.  We will continue our
-sojourn through SPARQL with Báeth and his similarly named compatriots
-in this next instalment where the `construct` query form will be
-introduced and discussed.
+sojourn through SPARQL with the list of individuals named Báeth
+collected in the first post in this instalment where the `construct`
+query form will be introduced and discussed.
 
 Simply but opaquely stated, the `construct` query form takes one
 sub-graph and returns a new sub-graph which is transformed from the
@@ -27,8 +27,8 @@ more interestingly, Báeth's genealogy as reconstructed by the
 reasoner.
 
 We will start by examining Báeth's children so that we can show their
-relationship to Baeth.  In this, we will need to choose a particular
-Báeth.  Using the query below:
+relationship to Báeth.  In this, we will need to choose a particular
+Báeth, using the query below:
 
 ```sparql 
 prefix foaf:  <http://xmlns.com/foaf/0.1/>
@@ -66,10 +66,12 @@ The above query (with reasoning enabled) returns 15 results as shown below:
 
 We discover that
 `http://example.com/Rawl_B502/clann_aingeda.trig#Báeth` has 12
-children that are directly related to that URL and who is well suited
-to demonstrate the basic construct facility.  The construct query
-below will return all twelve of these and Stardog Studio will render
-the graph into a nice visual format.
+children that are directly related to that URL, which means that they
+are all described as his children in a particular text and in one
+particular MS for which see the URL above, and who is well suited to
+demonstrate the basic construct facility.  The construct query below
+will return all twelve of these and Stardog Studio will render the
+graph into a nice visual format.
 
 ```sparql
 prefix rel: <http://purl.org/vocab/relationship/>
@@ -83,23 +85,23 @@ where {
 }
 ```
 
-`construct` queries generally have have two bodies.  After the
-`construct` keyword which is the target RDF the user wishes to
-create. The `from` keyword here serves a similar purpose as it does in
-the `select` query form and denotes that the user is interested in
-having the Triplestore consider the entire dataset when running the
-query.  The `where` keyword denotes the pattern that the Triplestore
-should match.  In this case, the pattern is the same as the RDF that
-the `construct` clause constructs.  The effect of this is to extract
-the sub-graph of all of Báeth's children from the entire graph of all
-of IrishGen.  This makes it possible to visualise.  It is no use to
-attempt to visualise the entire graph as a user would most likely get
-lost or confused.  Extracting and visualising sub-graphs allows the
-user to target persons of interest and their genealogical information
-without becoming overloaded by extraneous information.  Additionally,
-attempting to render visualisations of vast graphs is a huge
-computational task and most user's machines would not be powerful
-enough to accomplish it.
+`construct` queries generally have have two bodies.  The first is just
+after the `construct` keyword.  This first body is the target RDF the
+user wishes to create. The `from` keyword here serves a similar
+purpose as it does in the `select` query form and denotes that the
+user is interested in having the Triplestore consider the entire
+dataset when running the query.  The `where` keyword denotes the
+pattern that the Triplestore should match.  In this case, the pattern
+is the same as the RDF that the `construct` clause constructs.  The
+effect of this is to extract the sub-graph of all of Báeth's children
+from the entire graph of all of IrishGen.  This makes it possible to
+visualise.  It is no use attempting to visualise the entire graph as a
+user would most likely get lost or confused.  Extracting and
+visualising sub-graphs allows the user to target persons of interest
+and their genealogical information without becoming overloaded by
+extraneous information.  Additionally, attempting to render
+visualisations of vast graphs is a huge computational task and most
+users machines would not be powerful enough to accomplish it.
 
 As an aside, the above query can be written more concisely by using
 the single body form of `construct`, which can be useful when the user
@@ -142,7 +144,7 @@ understand what their query involves and what compromises they are
 willing to tolerate.
 
 To set the Stardog parameter "Query All Graphs" to true in Stardog
-Studio.  The user will need to go to "Databases" then select their
+Studio, the user will need to go to "Databases" then select their
 database from the list of databases.  In the right hand pane, the user
 will need to choose "Properties".  In the search box directly below
 the "Properties" header, type "query all".  This will cause the option
@@ -179,6 +181,9 @@ with the result being:
 | http://example.com/Rawl_B502/úib_luchta.trig#Dóelgus     |
 | http://example.com/Rawl_B502/úib_luchta.trig#Abiél       |
 
+The same set of URLs have been returned, but merely as a list which
+cannot be further visualised or queried.
+
 Continuing with the graph visualsation created above, one can explore
 the graph a bit at a time as one can see below, with reasoning turned
 off to ensure that the query can finish:
@@ -210,22 +215,22 @@ where {
 }
 ```
 
-The `constuct` form first shows what will be the product of the query.
-The `values` keyword is used to store static URLs which will be used
-repeatedly within the query.  This cuts down on visual complexity
-overall of the query.  The next part of the query is the meat of the
-process.  Expressed informally, this says: "return all people who are
-the ancestors of Báeth and their parent-child relationship and return
-the parent of Báeth as well".  These are then reconstructed in the
-`construct` form to create the reconstructed genealogy of Báeth.  The
-`union` is used to get Báeth themselves attached to the output through
-their parent which makes it slightly easier to interpret the
-visualisation.
+The `construct` form first shows what will be the product of the
+query.  The `values` keyword is used to store static URLs which will
+be used repeatedly within the query.  This cuts down on the visual
+complexity of the query overall.  The next part of the query is the
+meat of the process.  Expressed informally, this says: "return all
+people who are the ancestors of Báeth and their parent-child
+relationship and return the parent of Báeth as well".  These are then
+reconstructed in the `construct` form to create the reconstructed
+genealogy of Báeth.  The `union` is used to get Báeth themselves
+attached to the output through their parent which makes it slightly
+easier to interpret the visualisation.
 
 <img style="height:1000px;width:auto;" src="{{site.baseurl}}/assets/images/construct_baeth_3.png" />
 
 One will note that the genealogy only goes back to Imchad.  This is
-due to the fact that Imchada is not linked to any other part of the
+due to the fact that Imchad is not linked to any other part of the
 genealogies.  The reason for this is outside the scope of this post
 but could be as simple as a missing `owl:sameAs` link from elsewhere.
 The curators tend to be conservative and if there is no clear evidence
