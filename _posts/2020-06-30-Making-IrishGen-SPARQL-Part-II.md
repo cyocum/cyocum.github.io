@@ -101,7 +101,7 @@ visualising sub-graphs allows the user to target persons of interest
 and their genealogical information without becoming overloaded by
 extraneous information.  Additionally, attempting to render
 visualisations of vast graphs is a huge computational task and most
-users machines would not be powerful enough to accomplish it.
+user's machines would not be powerful enough to accomplish it.
 
 As an aside, the above query can be written more concisely by using
 the single body form of `construct`, which can be useful when the user
@@ -136,16 +136,17 @@ has the property off by default which can cause confusion when a user
 is encountering both Triplestores.  A second and more pressing problem
 is that expanding nodes in the face of reasoning can cause a query
 that a user's laptop cannot finish in a reasonable time or finish at
-all in the face of the query timeout restrictions.  In Stardog, this
-can be overcome by turning reasoning off when doing an exploration of
-the graph if the query does not return in a reasonable time but this
-limits what is possible.  It is up to the user's discretion to
-understand what their query involves and what compromises they are
-willing to tolerate.
+all in the face of the query timeout restrictions.  Although, in
+larger server based installations, it would be possible.  In Stardog,
+this can be overcome by turning reasoning off when doing an
+exploration of the graph if the query does not return in a reasonable
+time but this limits what is possible.  It is up to the user's
+discretion to understand what their query involves and what
+compromises they are willing to tolerate.
 
 To set the Stardog parameter "Query All Graphs" to true in Stardog
 Studio, the user will need to go to "Databases" then select their
-database from the list of databases.  In the right hand pane, the user
+database from the list of databases.  In the right-hand pane, the user
 will need to choose "Properties".  In the search box directly below
 the "Properties" header, type "query all".  This will cause the option
 to appear and the user can then check the checkbox to enable "Query
@@ -181,7 +182,7 @@ with the result being:
 | http://example.com/Rawl_B502/úib_luchta.trig#Dóelgus     |
 | http://example.com/Rawl_B502/úib_luchta.trig#Abiél       |
 
-The same set of URLs have been returned, but merely as a list which
+The same set of URLs has been returned, but merely as a list which
 cannot be further visualised or queried.
 
 Continuing with the graph visualsation created above, one can explore
