@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2020-06-30
+date: 2020-08-05
 title: "Making IrishGen SPARQL Part II: Constructs"
 author: cgy
 ---
