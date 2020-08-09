@@ -12,9 +12,9 @@ ORCID: <a href="https://orcid.org/{{ author.orcid }}" title="{{author.name}}">{{
 
 Over the last two posts, the two main query forms of SPARQL (Select
 and Construct) have been shown with examples from IrishGen.  These two
-query forms form the bulk of the operations a regular user of SPARQL
-will need to use on a regular basis.  This post will explain the uses
-of the two less often used query forms:
+query forms together form the bulk of the operations a regular user of
+SPARQL will need to use on a regular basis.  This post will explain
+the uses of the two less often used query forms:
 [Ask](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#ask) and
 [Describe](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#describe).
 These will be covered in the order in which they are most often used.
@@ -31,10 +31,12 @@ to go through the ceremony of a construct query.  Moreover, describe
 queries are often used in visual representations of RDF graphs.
 
 For instance, the below screenshot is from the GraphDB "Visual Graph"
-and uses Finn mac Cumaill as the exemplar.  What happens is that the
-user sends the URL in which they are interested and the system renders
-the return as a visual representation.  This is very useful when
-investigating single individuals within IrishGen.
+feature and uses Finn mac Cumaill as the exemplar.  What happens is
+that the user sends the URL in which they are interested and the
+system renders the RDF returned as a visual representation.  This is
+very useful when investigating single individuals within IrishGen.
+Additionally, it is good if a user wants to have a secure, singal
+starting point to explore the graph in various ways.
 
 [insert screen shot here]
 
@@ -48,10 +50,18 @@ The ask query has one use to inform the user if a basic graph pattern
 has a solution or not.  No other information than a boolean that
 indicates existance of a solution is returned.
 
-In terms of IrishGen, the use of this query form is to ask a quick
+In terms of IrishGen, the use of this query form is to ask for a quick
 indication if the information that a user is looking for exists within
-IrishGen.
+IrishGen.  This can be useful for what are called [Federated
+Queries](https://www.w3.org/TR/sparql11-federated-query/), which is an
+advanced SPARQL topic which will be covered in a future post.
+Although, in terms of how IrishGen is currently configured, incoming
+Federated Queries are not possible and outgoing Federated Queries are
+of minimal usefulness while Linked Data in Celtic Studies is not
+ubiquitous.
 
 # Conclusion
 
-This concludes 
+This concludes the series on SPARQL in terms of IrishGen.  While not
+every possibile combination was explored, these posts provide a basis
+for further exploring the IrishGen database.
