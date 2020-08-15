@@ -25,21 +25,22 @@ These will be covered in the order in which they are most often used.
 # Describe
 
 The describe query will return the RDF about a single URL supplied by
-the user.  What is returned by SPARQL is undefined (and deliberately
-so) in the standard.  What is generally returned is the RDF that the
-Triplestore has about a particular URL.  The usefulness of this is
-that if the user knows the URL, they can interrogate the Triplestore
-about what is stored in the Triplestore about that URL without needing
-to go through the ceremony of a construct query.  Moreover, describe
-queries are often used in visual representations of RDF graphs.
+the user.  What is returned by a Triplestore is undefined by SPARQL
+(and deliberately so) in the standard.  What is generally returned is
+the RDF that the Triplestore has about a particular URL.  The
+usefulness of this is that if the user knows the URL, they can
+interrogate the Triplestore about what is stored in the Triplestore
+about that URL without needing to go through the ceremony of a
+construct query.  Moreover, describe queries are often used in visual
+representations of RDF graphs.
 
-For instance, the below screenshot is from the GraphDB "Visual Graph"
-feature and uses Finn mac Cumaill as the exemplar.  What happens is
-that the user sends the URL in which they are interested and the
-system renders the RDF returned as a visual representation.  This is
-very useful when investigating single individuals within IrishGen.
-Additionally, it is good if a user wants to have a secure, single
-starting point to explore the graph in various ways.
+For instance, the screenshot below is from the GraphDB's "Visual
+Graph" feature and uses Finn mac Cumaill as the exemplar.  What
+happens is that the user sends the URL in which they are interested
+and the system renders the RDF returned as a visual representation.
+This is very useful when investigating single individuals within
+IrishGen.  Additionally, it is good if a user wants to have a secure,
+single starting point to explore the graph in various ways.
 
 <img src="{{site.baseurl}}/assets/images/describe_part3.png" />
 
@@ -72,3 +73,18 @@ SPARQL, most famously [SQL](https://en.wikipedia.org/wiki/SQL), form
 the backbone of data intensive systems.  Learning to manipulate these
 directly will give a user more power than any interface to a database
 could.
+
+From here, the user will need to use their new found SPARQL skills to
+explore IrishGen and other datasets.  For instance, Wikipedia has two
+widely used datasets: [DBPedia](https://wiki.dbpedia.org/) and
+[Wikidata](https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help).
+Practising and using IrishGen will cement the core skills presented in
+this series and give the user a sense of the possibilities for further
+research.
+
+Future posts will cover other aspects that are part of the SPARQL
+standard but not core to the user experience such as [Federated
+Queries](https://www.w3.org/TR/sparql11-federated-query/) and [Named
+Graphs](https://en.wikipedia.org/wiki/Named_graph).  These future
+posts will deepen the user's understanding of the power of Linked
+Data, RDF, and SPARQL.
