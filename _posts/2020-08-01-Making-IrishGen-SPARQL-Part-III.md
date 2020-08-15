@@ -10,11 +10,14 @@ author: cgy
 
 ORCID: <a href="https://orcid.org/{{ author.orcid }}" title="{{author.name}}">{{author.orcid}}</a>
 
-Over the last two posts, the two main query forms of SPARQL (Select
-and Construct) have been shown with examples from IrishGen.  These two
-query forms together form the bulk of the operations a regular user of
-SPARQL will need to use on a regular basis.  This post will explain
-the uses of the two less often used query forms:
+Over the last two posts ([part I]({% post_url
+2020-06-26-Making-IrishGen-SPARQL-Part-I %}), [part II]({% post_url
+2020-08-05-Making-IrishGen-SPARQL-Part-II %})), the two main query
+forms of SPARQL (Select and Construct) have been shown with examples
+from IrishGen.  These two query forms together form the bulk of the
+operations a regular user of SPARQL will need to use on a regular
+basis.  This post will explain the uses of the two less often used
+query forms:
 [Ask](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#ask) and
 [Describe](https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#describe).
 These will be covered in the order in which they are most often used.
@@ -35,10 +38,10 @@ feature and uses Finn mac Cumaill as the exemplar.  What happens is
 that the user sends the URL in which they are interested and the
 system renders the RDF returned as a visual representation.  This is
 very useful when investigating single individuals within IrishGen.
-Additionally, it is good if a user wants to have a secure, singal
+Additionally, it is good if a user wants to have a secure, single
 starting point to explore the graph in various ways.
 
-[insert screen shot here]
+<img src="{{site.baseurl}}/assets/images/describe_part3.png" />
 
 Further describe queries can then be executed to investigate
 connections further and the data returned can be integrated into the
@@ -48,7 +51,7 @@ visual representation of the graph.
 
 The ask query has one use to inform the user if a basic graph pattern
 has a solution or not.  No other information than a boolean that
-indicates existance of a solution is returned.
+indicates existence of a solution is returned.
 
 In terms of IrishGen, the use of this query form is to ask for a quick
 indication if the information that a user is looking for exists within
@@ -63,5 +66,9 @@ ubiquitous.
 # Conclusion
 
 This concludes the series on SPARQL in terms of IrishGen.  While not
-every possibile combination was explored, these posts provide a basis
-for further exploring the IrishGen database.
+every possible combination was explored, these posts provide a basis
+for further exploring the IrishGen database.  Query languages like
+SPARQL, most famously [SQL](https://en.wikipedia.org/wiki/SQL), form
+the backbone of data intensive systems.  Learning to manipulate these
+directly will give a user more power than any interface to a database
+could.
