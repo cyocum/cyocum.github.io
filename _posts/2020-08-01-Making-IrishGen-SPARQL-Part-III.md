@@ -56,14 +56,15 @@ describe <http://example.com/LL/lagin.trig#Find>
 ```
 
 will return over 1000 results giving everything that the Triplestore
-contains about Find.  The result of this is that the Visual Graph can
-be overwhelmed with information.  The best practice here is to choose
-the predicates that the user is interested in rather than attempting
-to sift through all the information.  While manipulating the Visual
-Graph feature of GraphDB is outside the scope of the present post,
-most often a user is only interested in one or two predicates so using
-the Visual Graph settings to filter out all results other than the
-ones that the user are interested in.
+contains about Find mac Cumaill.  The result of this is that the
+Visual Graph can be overwhelmed with information.  The best practice
+here is to choose the predicates that the user is interested in rather
+than attempting to sift through all the information.  While
+manipulating the Visual Graph feature of GraphDB is outside the scope
+of the present post, most often a user is only interested in one or
+two predicates so using the Visual Graph settings to filter out all
+results other than the ones that the user are interested in is
+generally desirable.
 
 # Ask
 
@@ -90,8 +91,11 @@ where {
 }
 ```
 
-will return `YES` as there is, in fact, a solution to the given
-basic graph pattern.
+This query asks if there are any URIs that have the predicate
+`irishRel:nomName` and object literal "Find" or, more informally, if
+there is someone with the nominative name Find in LL.  This will
+return `YES` as there is, in fact, a solution to the given basic graph
+pattern.
 
 More broadly, the Ask query can be useful for what are called
 [Federated Queries](https://www.w3.org/TR/sparql11-federated-query/),
