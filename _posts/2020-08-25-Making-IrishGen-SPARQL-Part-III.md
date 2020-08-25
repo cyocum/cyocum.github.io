@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2020-08-01
+date: 2020-08-25
 title: "Making IrishGen SPARQL Part III: Ask and Describe"
 author: cgy
 ---
