@@ -10,7 +10,7 @@ author: cgy
 
 ORCID: <a href="https://orcid.org/{{ author.orcid }}" title="{{author.name}}">{{author.orcid}}</a>
 
-Following on from earlier posts, this post will disucss the concept of
+Following on from earlier posts, this post will discuss the concept of
 [RDF Datasets](https://www.w3.org/TR/rdf11-datasets/) also known as
 Named Graphs.  The reader will need to be familiar with the basics of
 Linked Data and SPARQL and reading earlier posts would be advisable
@@ -56,15 +56,15 @@ understand how default graphs and named graphs interact, their queries
 will come up empty or, even worse, leave out important information.
 
 This is an important concept for IrishGen.  The medieval Irish
-geneaological tradition is not presented as a single whole.  The texts
-that comprise it are contained within MSS which are seperated in time
+genealogical tradition is not presented as a single whole.  The texts
+that comprise it are contained within MSS which are separated in time
 and space.  These were all compiled from various sources, including
 each other, and exist in their own right.  This situation is very
 messy from a data point of view.  There are competing constraints
 which need to be balanced when attempting to translate the situation
 as it stands within the MS tradition to the digital.  On the one hand,
 there is a solid core of information contained with in the major MS
-geneaological collections.  On the other hand, there are substantive
+genealogical collections.  On the other hand, there are substantive
 differences which must be respected.  Additionally, for users of
 IrishGen, it is equally important to be able to search one branch of
 the tradition or the other.  Without Named Graphs, as will be
@@ -98,14 +98,14 @@ meaningless; the `/LL/` portion of the URL, however, looks very much
 like the manuscript abbreviation for the Book of Leinster (LL) and, in
 fact, it is; the next portion of the URI is `lagin.trig` which is the
 current file; finally, `#Find` is the individual.  Without Named
-Graphs, this reading proceedure would need to be done for each URI
-returned.  This is ineffeicent and, as will be seen, difficult, but
+Graphs, this reading procedure would need to be done for each URI
+returned.  This is inefficient and, as will be seen, difficult, but
 not impossible, to replicate in SPARQL.
 
-So, if, for the sake of modling the genealogical situation in the
+So, if, for the sake of modelling the genealogical situation in the
 MSS, we wished to add the manuscripts as objects known to the
 Triplestore, we would need to find a way of doing that rather than the
-method delinated above.  Named Graphs model just this situation.  If
+method delineated above.  Named Graphs model just this situation.  If
 we wished to indicate the manuscript within which a triple appears as
 a sub-graph of the nameless default graph, we can do this in the TriG
 file format like so:
@@ -120,13 +120,13 @@ file format like so:
 }
 ```
 
-The above states that the triples that consitute an instance of Find
+The above states that the triples that constitute an instance of Find
 are a part of the `<http://example.com/LL>` graph.  This is much
 easier to write than adding an extra `<http://example.com/LL>` to each
 an every triple.  Looking through the IrishGen dataset, the reader
 will notice that each file states which named graph a set of triples
 to belongs to.  These Named Graphs represent the MS whence a set of
-triples derives.  This allows the triples to be seprated but still
+triples derives.  This allows the triples to be separated but still
 linked across graphs, which is the entire point of Linked Data.
 
 # Named Graphs and SPARQL
@@ -174,12 +174,12 @@ where {
 }
 ```
 
-This produces 19 results inline with expectations.  However, SPARQL
+This produces 19 results which meets expectations.  However, SPARQL
 has another method for doing this related to `from` called `from
 named`.  If this is applied to the query above with no other
 modifications, the result will be again _zero_.  This is because `from
 named` does not pull the named graph into the default graph, it only
-makes it avaliable to the rest of the query.  To actually get the
+makes it available to the rest of the query.  To actually get the
 expected result, the query needs to be like so:
 
 ```sparql
@@ -211,39 +211,46 @@ where {
 }
 ```
 
-The query above will again only return 19 results.
+The query above will again only return 19 results, which is because it
+does not search the default graph.
 
 ```sparql
 prefix irishRel: <http://example.com/earlyIrishRelationship.ttl#> 
 
-select ?a ?b
+select ?a ?g
 from <http://example.com/Rawl_B502>
 from named <http://example.com/LL>
 where {
-    ?b irishRel:nomName "Find"
-    graph ?g {
-        ?a irishRel:nomName "Find"
-    }
-
+    { ?a irishRel:nomName "Find" }
+    union {
+		graph ?g {
+			?a irishRel:nomName "Find"
+		}
+    }	
+}
 ```
 
-This really rather odd but illustrative query will return 475 results
-where geneological information from Rawl B 502 is pulled into the
-default graph and searched while information from LL stays within its
-sub-graph and is searched seperately.  The combination is creates to
-columns that are slightly smashed togther but it illistrates the point
-about where triples are placed using the two keywords.
+This illustrative query will return 21 results where genealogical
+information from Rawl B 502 is pulled into the default graph and
+searched while information from LL stays within its sub-graph and is
+searched separately.  The combination of both graphs is merged using
+the `union` SPARQL keyword which merges two queries into a single
+result set.  However, see below concerning how Stardogs and GraphDB's
+`owl:sameAs` semantics can make these results confusing in different
+ways depending on the Triplestore used.
 
 The last question that may be asked is: how does a user query all
 graphs without needing to specify each?  This is not currently
-possible in the SPARQL 1.1 standard so this is where things become
-complicated and the solution depends on the Triplestore the user
-chooses.  In Stardog there are two ways to do this.  First there is a
-special graph named `<tag:stardog:api:context:all>`.  This graph will
-automatically pull all triples known into the default graph.  Second,
-the user can set a property on the database in the Stardog settings
-named `Query All Graphs` which makes everything known by Stardog
-avaliable to be queried without needing to specify the graphs.
+possible in the [SPARQL 1.1
+standard](https://www.w3.org/TR/sparql11-overview/) so this is where
+the situation become complicated and the solution depends on the
+Triplestore that the user chooses.  In Stardog there are two ways to
+do this.  First there is a special graph named
+`<tag:stardog:api:context:all>`.  This graph will automatically pull
+all triples known into the default graph.  Second, the user can set a
+property on the database in the Stardog settings named `Query All
+Graphs` which makes everything known by Stardog available to be
+queried without needing to specify the graphs.
 
 One last note about how Stardog deals with Named Graphs and
 `owl:sameAs`.  Stardog's documentation
@@ -255,10 +262,10 @@ One last note about how Stardog deals with Named Graphs and
 > canonical individual. This avoids the combinatorial explosion in
 > query results while providing the data integration benefits.
 
-This means that if the user searches a graph, if the conanical
+This means that if the user searches a graph, if the canonical
 `owl:sameAs` is chosen such that it is in a different graph, it could
 appear in results in place of the one that is in the graph being
-searched.  This can cause suprising results; however, there is nothing
+searched.  This can cause surprising results; however, there is nothing
 that anyone can do about this due to the fact that Stardog does the
 above.  Additionally, for an individual who is the same across many
 graphs, this can change each time the database is loaded as the system
@@ -299,69 +306,80 @@ If the user runs the query:
 
 ```sparql
 prefix irishRel: <http://example.com/earlyIrishRelationship.ttl#> 
+prefix onto: <http://www.ontotext.com/>
 
 select ?a
 from <http://example.com/LL>
+from onto:explicit
 where {
     ?a irishRel:nomName "Find"
 }
 ```
 
-This will return 15 results versus Stardog's 19. 
+There will be 19 results as from Stardog.  What is `onto:explicit`?
+This has to do with the way in which GraphDB deals with `owl:sameAs`
+equivalency and acts much like Stardog's merging of those nodes that
+have an effect on the result set.  To break this, `onto:explicit`
+pseudo-name graph is used (see [Optimization of
+owl:sameAs](http://graphdb.ontotext.com/documentation/standard/sameas-optimisation.html)).
 
-Running the query with `from named` instead:
+To return to the query above which contains two named graphs, if the
+user wished to have all the instances of `irishRel:nomName "Find"`
+from LL and Rawl B502 without the `owl:sameAs` equivalencies
+interfering with the results, the query would be:
 
-```sparql 
+```sparql
+prefix onto: <http://www.ontotext.com/>
 prefix irishRel: <http://example.com/earlyIrishRelationship.ttl#> 
 
-select ?a
+select ?a ?g
+from <http://example.com/Rawl_B502>
 from named <http://example.com/LL>
+from onto:explicit
+from named onto:explicit
 where {
-    graph ?g {
-    	?a irishRel:nomName "Find"
-    }
+    { ?a irishRel:nomName "Find" }
+    union {
+		graph ?g {
+			?a irishRel:nomName "Find"
+		}
+    }	
 }
 ```
 
-Also yields 15 results.
+Although, it would be easier to just do this following:
 
-As a side note, if you follow the `owl:sameAs` links for the ones that
-do not respect the graph boundries, the reader will discover that they
-correspond to some of the ones returned by Stardog thus a correlation
-table can be constructed.
+```sparql
+prefix onto: <http://www.ontotext.com/>
+prefix irishRel: <http://example.com/earlyIrishRelationship.ttl#> 
 
-| Stardog                                                               | GraphDB                                                                                         |
-| http://example.com/LL/lagin.trig#Find                                 |                                                                                                 |
-| http://example.com/LL/do_thaicraige_arad.trig#Find                    | http://example.com/LL/do_thaicraige_arad.trig#Find                                              |
-| http://example.com/LL/dáil_caiss.trig#Find                            | http://example.com/Rawl_B502/de_genelogia_dál_chais_ut_inuenitur_in_psalterio_caissil.trig#Find |
-| http://example.com/LL/clanna_ébir_i_l-leith_chuind.trig#Find-0dc31110 |                                                                                                 |
-| http://example.com/LL/ciannacht.trig#Find                             |                                                                                                 |
-| http://example.com/LL/clanna_ébir_i_l-leith_chuind.trig#Find-7b6d0720 | http://example.com/Rawl_B502/clanna_ébeir_h_i_l_leith_chuind.trig#Find                          |
-| http://example.com/LL/clanna_ébir_i_l-leith_chuind.trig#Find-194ec360 | http://example.com/Rawl_B502/_92.trig#Find                                                      |
-| http://example.com/LL/forslonti_dáil_messi_corb.trig#Find-6ec2dee0    | http://example.com/LL/forslonti_dáil_messi_corb.trig#Find-6ec2dee0                              |
-| http://example.com/LL/rig_ailig.trig#Find                             | http://example.com/Rawl_B502/_94.trig#Find                                                      |
-| http://example.com/LL/h_n_echdach.trig#Find                           | http://example.com/LL/h_n_echdach.trig#Find                                                     |
-| http://example.com/LL/n_dési.trig#Find                                | http://example.com/LL/n_dési.trig#Find                                                          |
-| http://example.com/LL/tairdelbaig.trig#Find                           | http://example.com/LL/tairdelbaig.trig#Find                                                     |
-| http://example.com/LL/h_airgialla.trig#Find                           | http://example.com/LL/h_airgialla.trig#Find                                                     |
-| http://example.com/LL/genelach_clainde_brannduib.trig#Find-68dfd695   | http://example.com/LL/genelach_clainde_brannduib.trig#Find-68dfd695                             |
-| http://example.com/LL/rig_h_falge.trig#Fhind                          | http://example.com/Rawl_B502/genelach_úa_failgi.trig#Find                                       |
-| http://example.com/LL/síl_daimini.trig#Fhind                          | http://example.com/Rawl_B502/genelach_úa_fáeláin.trig#Find                                      |
-| http://example.com/LL/síl_daimini.trig#Fhind-a5cb5100                 |                                                                                                 |
-| http://example.com/LL/flaithe_h_riacain.trig#Find                     | http://example.com/LL/flaithe_h_riacain.trig#Find                                               |
-| http://example.com/LL/genelach_h_falgi.trig#Find                      | http://example.com/LL/genelach_h_falgi.trig#Find                                                |
+select ?a ?g
+from named <http://example.com/Rawl_B502>
+from named <http://example.com/LL>
+from named onto:explicit
+where {
+	graph ?g {
+		?a irishRel:nomName "Find"
+	}
+		
+}
+```
 
+The above is easier to write and read.
 
 # Conclusion
 
-As the reader can see, choosing a Triplestore has consequences for
-querying.  GraphDB's eilision mentioned above has this consequence: it
-makes searching the amalgam of the data taken from the MSS easy but
-makes searching a single MS confusing.  Stardog adheres to the
-standard more closely but because of its backwards chaining reasoning,
-it is excessively slow when reasoning is enabled.  Moreover, the way
-in which `owl:sameAs` is treated in Stardog can cause confusing
-results.  Although, this is also a problem in GraphDB as demonstrated.
-A user will need to keep this in mind when choosing which Triplestore
-to use for a specific task.
+Named graphs allow IrishGen to partition the various MSS sources into
+their own sub-graphs.  This allows the user to interrogate one MS
+tradition or another, which can be important to certain
+investigations.  However, choosing a Triplestore has consequences for
+querying in the presence of named graphs.  GraphDB's elision
+mentioned above has this consequence: it makes searching the amalgam
+of the data taken from all MSS easy but makes searching a single MS
+confusing.  Stardog adheres to the standard more closely but because
+of its backwards chaining reasoning, it is excessively slow when
+reasoning is enabled.  Moreover, the way in which `owl:sameAs` is
+treated in Stardog and GraphDB can cause confusing and confounding
+results.  A user will need to keep this in mind when choosing which
+Triplestore to use for a specific task.
 
