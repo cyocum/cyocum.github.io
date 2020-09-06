@@ -347,7 +347,8 @@ where {
 }
 ```
 
-Although, it would be easier to just do this following:
+This returns 44 results.  Although, it would be easier to do the
+following:
 
 ```sparql
 prefix onto: <http://www.ontotext.com/>
