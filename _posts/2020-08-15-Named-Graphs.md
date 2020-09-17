@@ -22,24 +22,27 @@ Named Graphs.  Third, and finally, how to use named graphs with SPARQL
 and what capabilities they allow when searching the database.  The
 outcome is that the reader will have an appreciation for: why Named
 Graphs exist, what this means for the structure of the IrishGen
-dataset, and how to use this facility in their research.
+dataset, and how to use this facility in their queries.
 
 # RDF Datasets (Named Graphs)
 
-Informally, an RDF Dataset is constructed of, at least, two graphs.
-The first graph is the Default Graph.  The second is a sub-graph which
-is distinct from the default graph and is given an arbitrary name by
-the user.  By default, all triples will exist within the Default
-Graph.  Any triple which exists within a named graph will have an
-extra part (sometimes termed "context") which will turn the triple
-into a quad.
+[Informally](https://www.w3.org/TR/rdf11-primer/#section-multiple-graphs),
+an RDF Dataset is constructed of, at least, two graphs.  The first
+graph is the Default Graph.  The second is a sub-graph which is
+distinct from the default graph and is given an arbitrary name by the
+user.  By default, all triples will exist within the Default Graph.
+Any triple which exists within a named graph will have an extra part
+(sometimes termed "context") which will turn the triple into a quad.
+In practice, this allows subsets of triples to be queried or a merge
+of different graphs into the default graph to be queried as will be
+shown below.
 
-Formally, an RDF Dataset is a collection of RDF graphs plus an unnamed
-default graph.  Each, except for the default graph, is a collection of
-triples that form a part of that named graph.  The name for the graph
-is a URI, everything in Linked Data is a URI, which defines the scope
-of the graph.  In practice, what this means is that an RDF triple when
-defined in a Named Graph becomes an RDF quad.
+Sadly, Named Graphs have [many formal
+definitions](https://www.w3.org/TR/2014/NOTE-rdf11-datasets-20140225/)
+which can make understanding them confusing.  This situation is due to
+the fact that the Semantic Web has set to come to a consensus as to
+the direct formal meaning of a Named Graph.  However, this does not
+detract from their usefulness in both SPARQL and IrishGen.
 
 The reason for the quad is that it allows users to partition data from
 different but related sources in a coherent way.  All triples that are
@@ -69,14 +72,16 @@ differences which must be respected.  Additionally, for users of
 IrishGen, it is equally important to be able to search one branch of
 the tradition or the other.  Without Named Graphs, as will be
 discussed shortly, users who only wished to search, for instance, LL
-would have to contort their searches to narrow their search.
-Otherwise, users would have to wade through the entire graph without
-respect to the MS tradition.
+would have to contort their searches to narrow them.  Otherwise, users
+would have to wade through the entire graph without respect to the MS
+tradition, which while interesting in its own right, like laying maps
+on top of each other to see the connection and disjuntions, would
+distort the tradition and give a false impression.
 
 # IrishGen and Named Graphs
 
 As an example of the problem of MS provenance without Named Graphs,
-take a triple concerning Find mac Cumail from LL,
+take a triple concerning Find mac Cumaill from LL,
 
 ```turtle
 <#Find>
@@ -97,17 +102,17 @@ to fulfil the RDF framework to have a URL but is otherwise
 meaningless; the `/LL/` portion of the URL, however, looks very much
 like the manuscript abbreviation for the Book of Leinster (LL) and, in
 fact, it is; the next portion of the URI is `lagin.trig` which is the
-current file; finally, `#Find` is the individual.  Without Named
-Graphs, this reading procedure would need to be done for each URI
-returned.  This is inefficient and, as will be seen, difficult, but
-not impossible, to replicate in SPARQL.
+current genealogical item and file; finally, `#Find` is the
+individual.  Without Named Graphs, this reading procedure would need
+to be done for each URI returned.  This is inefficient and, as will be
+seen, difficult, but not impossible, to replicate in SPARQL.
 
 So, if, for the sake of modelling the genealogical situation in the
-MSS, we wished to add the manuscripts as objects known to the
-Triplestore, we would need to find a way of doing that rather than the
-method delineated above.  Named Graphs model just this situation.  If
-we wished to indicate the manuscript within which a triple appears as
-a sub-graph of the nameless default graph, we can do this in the TriG
+MSS, we wished to add MSS as objects known to the Triplestore, we
+would need to find a way of doing that rather than the method
+delineated above.  Named Graphs model just this situation.  If we
+wished to indicate the manuscript within which a triple appears as a
+sub-graph of the nameless default graph, we can do this in the TriG
 file format like so:
 
 ```turtle
@@ -160,7 +165,7 @@ nameless default graph and thus it will produce no results.  How do we
 create a query which will return what is expected?  For this SPARQL
 has two methods, the first is the `from` keyword.  This keyword is
 followed by the named graph that is of interest.  What this does is
-pull the entire Named Graph into the nameless default Named Graph.
+pull the entire named graph into the nameless default named graph.
 So, if we wanted to pull all triples from LL into the default graph,
 we would use from like so:
 
@@ -243,7 +248,7 @@ The last question that may be asked is: how does a user query all
 graphs without needing to specify each?  This is not currently
 possible in the [SPARQL 1.1
 standard](https://www.w3.org/TR/sparql11-overview/) so this is where
-the situation become complicated and the solution depends on the
+the situation becomes complicated and the solution depends on the
 Triplestore that the user chooses.  In Stardog there are two ways to
 do this.  First there is a special graph named
 `<tag:stardog:api:context:all>`.  This graph will automatically pull
@@ -374,13 +379,13 @@ Named graphs allow IrishGen to partition the various MSS sources into
 their own sub-graphs.  This allows the user to interrogate one MS
 tradition or another, which can be important to certain
 investigations.  However, choosing a Triplestore has consequences for
-querying in the presence of named graphs.  GraphDB's elision
-mentioned above has this consequence: it makes searching the amalgam
-of the data taken from all MSS easy but makes searching a single MS
-confusing.  Stardog adheres to the standard more closely but because
-of its backwards chaining reasoning, it is excessively slow when
-reasoning is enabled.  Moreover, the way in which `owl:sameAs` is
-treated in Stardog and GraphDB can cause confusing and confounding
-results.  A user will need to keep this in mind when choosing which
-Triplestore to use for a specific task.
+querying in the presence of named graphs.  GraphDB's elision mentioned
+above has this consequence: it makes searching the amalgam of the data
+taken from all MSS easy but can make searching a single MS confusing.
+Stardog adheres to the standard more closely but because of its
+backwards chaining reasoning, it is excessively slow when reasoning is
+enabled.  Moreover, the way in which `owl:sameAs` is treated in
+Stardog and GraphDB can cause confusing and confounding results.  A
+user will need to keep this in mind when choosing which Triplestore to
+use for a specific task.
 
