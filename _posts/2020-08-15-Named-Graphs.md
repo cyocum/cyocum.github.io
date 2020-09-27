@@ -41,11 +41,7 @@ IrishGen, it is equally important to be able to search one branch of
 the tradition or the other.  Without Named Graphs, as will be
 discussed shortly, users who only wished to search, for instance, The
 [Book of Leinster](https://en.wikipedia.org/wiki/Book_of_Leinster)
-would have to contort their searches to narrow them.  Otherwise, users
-would have to wade through the entire graph without respect to the MS
-tradition, which while interesting in its own right, like laying maps
-on top of each other in order to see the connection and disjunctions,
-would distort the tradition and give a false impression.
+would have to contort their searches to narrow them.
 
 When using a database such as IrishGen which replicates in
 computational form data which is taken directly from primary sources,
