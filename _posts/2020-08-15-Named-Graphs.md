@@ -16,14 +16,17 @@ Named Graphs.  The reader will need to be familiar with the basics of
 Linked Data and SPARQL and reading earlier posts would be advisable
 before continuing.  This post will proceed in four parts.  First, a
 practical example as to why Named Graphs are necessary and useful.
-Second, a theoretical overview of the situation in terms of both RDF
-and how that interacts with IrishGen.  Third, what a Named Graph looks
-like within the IrishGen dataset and how to read the dataset in light
-of Named Graphs.  Fourth, and finally, how to use Named Graphs with
-SPARQL and what capabilities they allow when searching the database.
-The outcome is that the reader will have an appreciation for: why
-Named Graphs exist, what this means for the structure of the IrishGen
-dataset, and how to use this facility in their queries.
+Second, a discussion of the Named Graphs and the Default Graph and how
+they interact.  Third, how Named Graphs are searched via SPARQL in the
+context of IrishGen.  Fourth, and finally, how and why the
+`owl:sameAs` predicate is used in IrishGen and what effects it has to
+the result sets returned from the two Triplestores.  The outcome is
+that the reader will have an appreciation for: why Named Graphs exist,
+what this means for the structure of the IrishGen dataset, and how to
+use this facility in their queries.  Additionally, the user will get
+an appreciation for how and why `owl:sameAs` is handled in the two
+Triplestores and what effect that will have on their query's result
+sets.
 
 # Provenance of Data
 
