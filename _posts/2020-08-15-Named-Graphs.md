@@ -551,10 +551,11 @@ large effect on the result sets returned.
 Named Graphs allow IrishGen to partition the various MSS sources into
 their own sub-graphs.  This allows the user to interrogate one MS
 tradition or another, which can be important to certain investigations
-such as when a user is searching for specific information which is
-known to reside in a particular MS.  For instance, a name is found in
-the same MS and the user wishes to check the genealogies quickly to
-see if that name is found within it.
+such as when a user is searching to verify whether a certain piece of
+information exists in a certain MS version.  For instance, a name is
+found within a MS and the user wishes to check the genealogies
+contained in the same MS quickly to see if that name is found within
+it.
 
 However, choosing a Triplestore has consequences for querying in the
 presence of Named Graphs.  GraphDB's implementation mentioned above
