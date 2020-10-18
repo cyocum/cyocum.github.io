@@ -343,9 +343,10 @@ where {
 }
 ```
 
-In GraphDB, this query will return 105 results.  Why does this return
-so many results?  This is due to the way in which GraphDB constructs
-its [Default
+In GraphDB, this query will return 105 results, which is the total
+number of instances of "Find" in the dataset.  Why does this return so
+many results?  This is due to the way in which GraphDB constructs its
+[Default
 Graph](http://graphdb.ontotext.com/documentation/standard/query-behaviour.html):
 
 > > GraphDB constructs the default dataset as follows:
