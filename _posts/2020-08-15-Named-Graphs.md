@@ -1,7 +1,7 @@
-\---
+---
 layout: post
 date: 2020-08-15
-title: "RDF Datasets and Named Graphs"
+title: RDF Datasets and Named Graphs
 author: cgy
 ---
 
