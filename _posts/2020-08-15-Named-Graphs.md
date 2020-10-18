@@ -36,14 +36,14 @@ separated in time and space.  These were all compiled from various
 sources and exist in their own right.  This situation is very messy
 from a data modelling point of view.  There are competing constraints
 which need to be balanced when attempting to translate the situation
-as it stands within the MS tradition to the digital.  On the one hand,
-there is a solid core of information contained within the major MS
-genealogical collections.  On the other hand, there are substantive
-differences which must be respected.  Additionally, for users of
-IrishGen, it is equally important to be able to search one branch of
-the tradition or the other.  Without Named Graphs, as will be
-discussed shortly, users who only wished to search, for instance, The
-[Book of Leinster](https://en.wikipedia.org/wiki/Book_of_Leinster)
+as it stands within the MS tradition to the Linked Data universe.  On
+the one hand, there is a solid core of information contained within
+the major MS genealogical collections.  On the other hand, there are
+substantive differences which must be respected.  Additionally, for
+users of IrishGen, it is equally important to be able to search one
+branch of the tradition or the other.  Without Named Graphs, as will
+be discussed shortly, users who only wished to search, for instance,
+The [Book of Leinster](https://en.wikipedia.org/wiki/Book_of_Leinster)
 would have to contort their searches to narrow them.
 
 When using a database such as IrishGen which replicates in
@@ -83,36 +83,54 @@ the user has a name from another source and wishes to know if the same
 name appears in the genealogical corpus, a database wide search is
 often not what is wanted.
 
-When a Named Graph is attached to a triple, it is transformed into a
-"quad".  This extra bit of information is attached to every triple in
-a Named Graph.  For instance, a triple will normally look like this to
-a Triplestore:
+The solution to this problem is to partition the dataset into
+sub-graphs.  Named Graphs allow the user to define what sub-graph a
+triple will belong to.  In the case of IrishGen, Named Graphs define
+the relationship between the triple and the sub-graph.  As with all
+things in Linked Data, the sub-graph is defined by a URL.  In the case
+of IrishGen, the URL is `http://example.com/` plus the commonly used
+scholarly abbreivation.  For instance, in the case of the Book of
+Leinster the URL is: `http://example.com/LL`.
+
+More technically, when a Named Graph is attached to a triple, it is
+transformed into a "quad".  This extra bit of information is attached
+to every triple in a Named Graph.  For instance, a triple will
+normally look like this to a Triplestore:
 
 ```turtle
 <http://example.com/LL/lagin.trig#Find> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
 ```
 
-This triple states that "Find is a person".  When the Named Graph is
-added, the triple will be transformed thus:
+This triple states informally that "Find is a person".  When the Named
+Graph is added, the triple will be transformed thusly:
 
 ```turtle
 <http://example.com/LL/lagin.trig#Find> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> <http://example.com/LL>
 ```
 
 This is now a quad (it has four basic elements rather than three).
-This quad states: "Find is a person in the graph
-<http://example.com/LL>".
+This quad informally states: "Find is a person in the graph
+<http://example.com/LL>".  The quad above can be read more liberally
+as "Find is a person in the Book of Leinster".  To make the above
+slightly more comprehensible, the [TRiG](https://www.w3.org/TR/trig/)
+file format slightly extends the
+[Turtle](https://www.w3.org/TR/turtle/) format to accomodate the
+sub-graph.  So, if a user looks at the data directly, rather than
+through a Triplestore, it will look something like this:
 
-IrishGen uses Named Graphs to partition its data by MS, a MS is now a
-graph within the triplestore, and it uses generally accepted scholarly
-MS abbreviations to denote these graphs so users familiar with the
-abbreviations can identify the provenance of information at a glance.
-For instance, the abbreviation for the [Book of
-Leinster](https://en.wikipedia.org/wiki/Book_of_Leinster) is LL.
-Thus, the quad above can be read more liberally as "Find is a person
-in the Book of Leinster".  To search for the instances of a nominal
-name "Find" in the Book of Leinster's genealogies, the SPARQL query
-would be:
+```turtle
+<http://example.com/LL> {
+     <#Find>
+         a foaf:Person;
+         irishRel:nomName "Find";
+         rel:descendantOf <#Baiscni>;
+         rdfs:comment "Senchan Torpeist cecinit isin Cocangaib".
+}
+
+```
+
+To search for the instances of a nominal name "Find" in the Book of
+Leinster's genealogies, the SPARQL query would be:
 
 ```sparql
 prefix irishRel: <http://example.com/earlyIrishRelationship.ttl#> 
@@ -126,9 +144,9 @@ where {
 }
 ```
 
-This ensured, with very important caveats explored below, that only
-information from the Book of Leinster will be returned to this query,
-allowing the user to narrow to a specific MS or set of MSS.
+This ensures, with some very important caveats explored below, that
+only information from the Book of Leinster will be returned to this
+query, allowing the user to narrow to a specific MS or set of MSS.
 
 At the moment of writing, Named Graphs are not composable.  For
 instance, you cannot nest a Named Graph within another Named Graph.
@@ -139,13 +157,14 @@ graph.
 # Named Graphs and the Default Graph (RDF Dataset)
 
 Because triples were created before quads, the two ways of denoting
-information in RDF must be compatible with each other.  Triples exist
-in the Default Graph while quads exist within their own, distinct,
-graph.  In the case of IrishGen currently, there are no triples but
-only quads.  Every bit of information stored within IrishGen is given
-a MS as a Named Graph (sometimes termed "context").  This has
-consequences for how SPARQL handles queries which deal with Named
-Graphs.
+information in RDF must be compatible with each other.  This is done
+by defining two seperate domains: the Default Graph and any Named
+Graphs.  Triples exist in the Default Graph while quads exist within
+their own, distinct, Named Graphs as defined by the dataset.  In the
+case of IrishGen currently, there are no triples but only quads.
+Every bit of information stored within IrishGen is given a MS as a
+Named Graph (sometimes termed "context").  This has consequences for
+how SPARQL handles queries which deal with Named Graphs.
 
 Sadly, Named Graphs have [many formal
 definitions](https://www.w3.org/TR/2014/NOTE-rdf11-datasets-20140225/)
@@ -178,15 +197,16 @@ where {
 }
 ```
 
-The query above will produce _zero_ results.  This has even caused
-confusion to the curators several times.  Why does this produce no
-results?  It is because this query does not query the entire graph; it
-only queries the Default Graph, the graph which contains only triples.
-Find does not appear in the Default Graph and thus the query will
-produce no results.  The key to understanding this is that IrishGen is
-split into MS Named Graphs and does not have triples in the Default
-Graph thus searching the Default Graph will yield no results because
-there is nothing in the Default Graph.
+The query above will produce _zero_ results when used with IrishGen.
+This has caused confusion to the curators several times over the
+course of the project.  Why does this produce no results?  It is
+because this query does not query the entire graph; it only queries
+the Default Graph, the graph which contains only triples.  Find does
+not appear in the Default Graph and thus the query will produce no
+results.  The key to understanding this is that IrishGen is split into
+MS Named Graphs and does not have triples in the Default Graph thus
+searching the Default Graph will yield no results because there is
+nothing in the Default Graph.
 
 How do we create a query which will return what is expected?  For this
 SPARQL has two methods, the first is the `from` keyword.  This keyword
@@ -229,7 +249,7 @@ where {
 
 Before continuing to demonstrate combining `from` and `from named` in
 a single query, it is useful to restate the purpose of these
-statements as they can be confusing. `form` pulls quads from a Named
+statements as they can be confusing. `from` pulls quads from a Named
 Graph into the Default Graph.  This means that triples and quads can
 be merged together in a single query.  `from named` retains the
 distinction between Default Graph and Named graph.  Queries that use
@@ -307,9 +327,8 @@ in Stardog, will automatically pull Named Graph all quads into the
 Default Graph.  Second, the user can set a property on the database in
 the Stardog settings named `Query All Graphs` which pulls all Named
 Graph quads into the Default Graph by default, which makes using the
-`from named`, `from`, and `graph` keywords all unnecessary to search
-all quads at once.
-
+`from named`, `from`, and `graph` keywords unnecessary to search all
+quads at once.
 
 Turning to GraphDB, the situation is slightly different.  Taking the
 original naive query from above:
@@ -441,7 +460,8 @@ If it is run under GraphDB, it will return 16 results.  The difference is:
 
 Which one of these results is correct?  Both are if the user considers
 that GraphDB creates an equivalence class that combines answers when
-doing inferencing.  The two answers can be 
+doing inferencing.  The two answers can be reconsiled using GraphDB's
+pseudo-graphs:
 
 ```sparql
 prefix irishRel: <http://example.com/earlyIrishRelationship.ttl#> 
@@ -461,7 +481,7 @@ What is `onto:explicit`?  As the GraphDB documentation discussed above states:
 
 This disables the inferencer and returns what is explicitly stated in
 the IrishGen files.  Is this what the user will always want though?
-That is up to the user at the tie the query is run.
+That is up to the user at the time the query is run.
 
 To return to the query above which contains two Named Graphs, if the
 user wished to have all the instances of `irishRel:nomName "Find"`
@@ -530,10 +550,10 @@ connections that person may have in the medieval Irish genealogies
 which will help understand and read the context of the other text.
 
 However, choosing a Triplestore has consequences for querying in the
-presence of Named Graphs.  GraphDB's  mentioned above has this
-consequence: it makes searching the amalgam of the data taken from all
-MSS easy.  Stardog adheres to the standard more closely but because of
-its backwards chaining reasoning, it can be very slow when reasoning
-is enabled.  Moreover, the way in which `owl:sameAs` is treated in
-Stardog and GraphDB has an effect on the result set that needs to be
-considered when writing and running queries.
+presence of Named Graphs.  GraphDB's implementation mentioned above
+has this consequence: it makes searching the amalgam of the data taken
+from all MSS easy.  Stardog adheres to the standard more closely but
+because of its backwards chaining reasoning, it can be very slow when
+reasoning is enabled.  Moreover, the way in which `owl:sameAs` is
+treated in Stardog and GraphDB has an effect on the result set that
+needs to be considered when writing and running queries.
