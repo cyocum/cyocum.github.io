@@ -43,7 +43,7 @@ substantive differences which must be respected.  Additionally, for
 users of IrishGen, it is equally important to be able to search one
 branch of the tradition or the other.  Without Named Graphs, as will
 be discussed shortly, users who only wished to search, for instance,
-The [Book of Leinster](https://en.wikipedia.org/wiki/Book_of_Leinster)
+the [Book of Leinster](https://en.wikipedia.org/wiki/Book_of_Leinster)
 would have to contort their searches to narrow them.
 
 When using a database such as IrishGen which replicates in
@@ -51,7 +51,7 @@ computational form data which is taken directly from primary sources,
 it is imperative that IrishGen is clear concerning whence that
 information derives.  As it stands, a triple does not carry with it a
 method for partitioning information.  Within IrishGen, there is an
-ad-hoc attempt to this by encoding the MS that a triple is from into
+ad-hoc attempt at this by encoding the MS that a triple is from into
 the triple's URL.  While this method can work with some extra
 diligence from the user, it is far from perfect.  Thankfully, others
 have encountered the same problem and the Semantic Web community has
@@ -89,7 +89,7 @@ triple will belong to.  In the case of IrishGen, Named Graphs define
 the relationship between the triple and the sub-graph.  As with all
 things in Linked Data, the sub-graph is defined by a URL.  In the case
 of IrishGen, the URL is `http://example.com/` plus the commonly used
-scholarly abbreivation.  For instance, in the case of the Book of
+scholarly abbreviation.  For instance, in the case of the Book of
 Leinster the URL is: `http://example.com/LL`.
 
 More technically, when a Named Graph is attached to a triple, it is
@@ -101,8 +101,9 @@ normally look like this to a Triplestore:
 <http://example.com/LL/lagin.trig#Find> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person>
 ```
 
-This triple states informally that "Find is a person".  When the Named
-Graph is added, the triple will be transformed thusly:
+This triple states informally that "this particular instance of Find
+is a person".  When the Named Graph is added, the triple will be
+transformed thus:
 
 ```turtle
 <http://example.com/LL/lagin.trig#Find> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> <http://example.com/LL>
@@ -114,7 +115,7 @@ This quad informally states: "Find is a person in the graph
 as "Find is a person in the Book of Leinster".  To make the above
 slightly more comprehensible, the [TRiG](https://www.w3.org/TR/trig/)
 file format slightly extends the
-[Turtle](https://www.w3.org/TR/turtle/) format to accomodate the
+[Turtle](https://www.w3.org/TR/turtle/) format to accommodate the
 sub-graph.  So, if a user looks at the data directly, rather than
 through a Triplestore, it will look something like this:
 
@@ -158,7 +159,7 @@ graph.
 
 Because triples were created before quads, the two ways of denoting
 information in RDF must be compatible with each other.  This is done
-by defining two seperate domains: the Default Graph and any Named
+by defining two separate domains: the Default Graph and any Named
 Graphs.  Triples exist in the Default Graph while quads exist within
 their own, distinct, Named Graphs as defined by the dataset.  In the
 case of IrishGen currently, there are no triples but only quads.
@@ -292,12 +293,12 @@ where {
 This illustrative query will return 21 results where genealogical
 quads from [Rawl
 B502](https://,en.wikipedia.org/wiki/Bodleian_Library,_MS_Rawlinson_B_502)
-is pulled into the default graph and searched while information from
+are pulled into the default graph and searched while information from
 LL stays within its Named Graph and is searched separately.  The
 combination of both graphs is merged using the `union` SPARQL keyword
 which merges two result sets into a single result set.  However, see
-below concerning how Stardog's and GraphDB's `owl:sameAs` semantics can
-make these results confusing in different ways depending on the
+below concerning how Stardog's and GraphDB's `owl:sameAs` semantics
+can make these results confusing in different ways depending on the
 Triplestore used.  The above query can be written just the same using
 two `from named` statements and using just the `graph` keyword.  As an
 example:
@@ -418,7 +419,8 @@ backwards-chaining:
 More detail is available in GraphDB's
 [documentation](http://graphdb.ontotext.com/documentation/standard/sameas-optimisation.html).
 
-To demonstrate how this effects GraphDB's results, if the user runs the query:
+To demonstrate how this effects GraphDB's results, if the user runs
+the query in Stardog:
 
 ```sparql
 prefix irishRel: <http://example.com/earlyIrishRelationship.ttl#> 
@@ -430,7 +432,7 @@ where {
 }
 ```
 
-There will be 19 results as from Stardog.  
+There will be 19 results.
 
 | http://example.com/LL/ciannacht.trig#Find                             |
 | http://example.com/LL/clanna_ébir_i_l-leith_chuind.trig#Find-0dc31110 |
@@ -460,7 +462,7 @@ If it is run under GraphDB, it will return 16 results.  The difference is:
 
 Which one of these results is correct?  Both are if the user considers
 that GraphDB creates an equivalence class that combines answers when
-doing inferencing.  The two answers can be reconsiled using GraphDB's
+doing inferencing.  The two answers can be reconciled using GraphDB's
 pseudo-graphs:
 
 ```sparql
@@ -526,10 +528,15 @@ where {
 ```
 
 The above is easier to write and read.  This returns 44 results, which
-contrasts with the 21 results returned from Stardog.  To bring the
-results into alignment, all one needs to do is remove the
-`onto:explicit` and the above query will return 21 just the same as
-Stardog.
+contrasts with the 21 results returned from Stardog.  This means that
+there are 44 instances of the name "Find" but only 21 distinct
+individuals who could be identified as `owl:sameAs` each other.  To
+state this slightly differently, the key to the distinction is that
+there are 44 instances of the name "Find" while there are only 21
+actual individuals who can be treated the same as each other.  To
+reinstate the `owl:sameAs` and reimpose the `owl:sameAs` logic, all
+one needs to do is remove the `onto:explicit` and the above query will
+return 21 just the same as Stardog.
 
 As the reader can see, using OWL 2's `sameAs` has various effects on
 the outcome of queries.  This needs to be kept in mind whenever a
@@ -543,11 +550,10 @@ large effect on the result sets returned.
 Named Graphs allow IrishGen to partition the various MSS sources into
 their own sub-graphs.  This allows the user to interrogate one MS
 tradition or another, which can be important to certain investigations
-such as when a user is searching broadly for some information; for
-instance, a name is encountered in another text and the user wishes to
-know if the name appears in any genealogical corpus and any context or
-connections that person may have in the medieval Irish genealogies
-which will help understand and read the context of the other text.
+such as when a user is searching for specific information which is
+known to reside in a particular MS.  For instance, a name is found in
+the same MS and the user wishes to check the genealogies quickly to
+see if that name is found within it.
 
 However, choosing a Triplestore has consequences for querying in the
 presence of Named Graphs.  GraphDB's implementation mentioned above
