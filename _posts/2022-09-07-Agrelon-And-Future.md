@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2022-09-07
+date: 2022-08-07
 title: "Agrelon and the Future Direction of IrishGen"
 author: cgy
 ---
